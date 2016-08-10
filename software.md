@@ -11,7 +11,7 @@ Economics 5330 is taught using Python and the *Scientific Stack*, a set of core 
 
 ## Git
 
-The use of version control systems is essential for effective scientific computing. In Bios 8366, we [make extensive use of Git](http://fonnesbeck.github.io/Bios8366/git.html), which is one of several widely-used versioning systems.
+The use of version control systems is essential for effective scientific computing. In Economics 5330, we [make extensive use of Git](http://fonnesbeck.github.io/Economics5330/git.html), which is one of several widely-used versioning systems.
 
 To install Git, you can either download an installer from [the Git website](http://git-scm.com), or if you are on a UNIX-based computer, install it via your system's package manager (recommended). On Mac OS X, you can easily install a variety of software packages using [Homebrew](http://mxcl.github.io/homebrew/ "Homebrew — MacPorts driving you to drink? Try Homebrew!"). To obtain Git, simply type:
 
@@ -39,24 +39,24 @@ In addition to Python itself, we will be making use of several packages in the s
 * [PyMC3](https://github.com/pymc-devs/pymc3 "pymc-devs/pymc3 · GitHub")
 * [scikit-learn](http://scikit-learn.org/ "scikit-learn: machine learning in Python &mdash; scikit-learn 0.13.1 documentation")
 
-We will install everything you require for Bios 8366 in one operation, described in the next section.
+We will install everything you require for Economics 5330 in one operation, described in the next section.
 
 ## Getting this repository
 
-    git clone https://github.com/fonnesbeck/Bios8366.git
+    git clone https://github.com/fonnesbeck/Economics5330.git
 
 If you are not familiar with Git and GitHub, you can simply download the zip file of the repository at the top of the main repository page.
 
 Then, move to the directory created by the clone/zip file:
 
-    cd Bios8366
+    cd Economics5330
 
 and install everything using `conda`:
 
     conda config --add channels conda-forge
     conda env create -f environment.yml
     
-This will create an **environment** called `bios8366` that includes the packages required for the course.    
+This will create an **environment** called `bios5330` that includes the packages required for the course.    
     
 If you are not using the Anaconda Python distribution, you will need to manually install the packages listed in `environment.yml` using `pip`.
 
@@ -66,7 +66,7 @@ So install Anaconda.
 
 To use the environment, you may type:
 
-    source activate bios8366
+    source activate bios5330
 
 
 ## Document Preparation Tools
@@ -80,4 +80,4 @@ For preparing assignments and final projects, students may select from a variety
 * [Multimarkdown](http://fletcherpenney.net/multimarkdown/ "MultiMarkdown") An enhanced version of Markdown.
 * [reStructuredText](http://docutils.sourceforge.net/rst.html "reStructuredText") An easy-to-read, what-you-see-is-what-you-get plaintext markup syntax and parser system
 
-***The use of traditional word processing software, such as Microsoft Word or OpenOffice is not permitted in Bios 8366.***
+***The use of traditional word processing software, such as Microsoft Word or OpenOffice is not permitted in Economics 5330.***

@@ -17,7 +17,7 @@ Students must be prepared to program in Python for computational assignments.
 
 # Instructor
 
-[Tyler Brough](tyler.brough@aggiemail.usu.edu), PhD, Associate Professor of Finance 
+[Tyler Brough](htts://huntsman.usu.edu/about/faculty?faculty-directory&memberID=5181), PhD, Associate Professor of Finance 
 
 Eccles Business Building 605
 
