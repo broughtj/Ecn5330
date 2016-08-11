@@ -9,7 +9,7 @@ title: Financial Econometrics
 
 ### Required Textbook
 
-[Introductory Econometrics for Finance](www.cambridge.org/us/academic/subjects/economics/finance/introductory-econometrics-finance-3rd-edition?format=PB) by Chris Brooks. 
+[Introductory Econometrics for Finance](http://www.cambridge.org/us/academic/subjects/economics/finance/introductory-econometrics-finance-3rd-edition?format=PB) by Chris Brooks.
 
 ### Supporting Material
 
@@ -36,5 +36,5 @@ The following are not required, but I may present material based on them.
 [The Econometrics of Financial Markets](http://press.princeton.edu/titles/5904.html) by John Y. Campbell, Andrew W.
 Lo, and A. Craig MacKinlay.
 
-[Analysis of Integrated and Cointegrated Time Series with R](http://www.pfaffikus.de/springer.html)
+[Analysis of Integrated and Cointegrated Time Series with R](http://www.pfaffikus.de/springer.html) by Bernhard Pfaff. 
 
