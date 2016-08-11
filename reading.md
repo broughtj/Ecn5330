@@ -16,7 +16,7 @@ title: Financial Econometrics
 The following are not required, but suggested for the serious student, especially if you are considering graduate
 school. I will present some material based on them.
 
-[Causal Inference in Statistics: A Primer](http://bayes.cs.ucla.edu/PRIMER/) by Judea Pearl, Madelyn Glymour, and Nicholas P. Jewell.
+[Causal Inference in Statistics: A Primer](http://bayes.cs.ucla.edu/PRIMER/) by Pearl, Glymour, and Jewell.
 
 [Machine Learning: a Probabilistic Perspective](https://www.cs.ubc.ca/~murphyk/MLbook/) by Kevin P. Murphy. 
 
@@ -33,8 +33,7 @@ The following are not required, but I may present material based on them.
 
 [Numerical Python](https://jrjohansson.github.io/numericalpython.html) by Robert Johansson. 
 
-[The Econometrics of Financial Markets](http://press.princeton.edu/titles/5904.html) by John Y. Campbell, Andrew W.
-Lo, and A. Craig MacKinlay.
+[The Econometrics of Financial Markets](http://press.princeton.edu/titles/5904.html) by Campbell, Lo, MacKinlay.
 
 [Analysis of Integrated and Cointegrated Time Series with R](http://www.pfaffikus.de/springer.html) by Bernhard Pfaff. 
 
