@@ -17,7 +17,7 @@ Students must be prepared to program in Python for computational assignments.
 
 # Instructor
 
-[Tyler Brough](tylerbrough.com), PhD, Associate Professor of Finance 
+[Tyler Brough](https://broughtj.github.io), PhD, Associate Professor of Finance 
 
 Eccles Business Building 605
 
