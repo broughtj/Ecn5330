@@ -13,6 +13,9 @@ title: Financial Econometrics
 
 The following schedule is a statement of intent; content and order may change at any time.
 
+The course schedule is viewable as a Google Sheet at
+(https://docs.google.com/spreadsheets/d/1CTIUDhmZ94DwnOBBAenVR0nKp_F-73ChI-qlnl9FySI/edit?usp=sharing)
+
 
 ---
 
