@@ -29,11 +29,17 @@ Students will be assigned one or more papers to be read during the week prior to
 
 The following are not required, but I may present material based on them. 
 
+#### Python
+
 [Python for Data Analysis](http://shop.oreilly.com/product/0636920023784.do?code=WKDATASC) by Wes McKinney
 
 [Numerical Python](https://jrjohansson.github.io/numericalpython.html) by Robert Johansson. 
 
+#### Econometrics and Statistics 
+
 [The Econometrics of Financial Markets](http://press.princeton.edu/titles/5904.html) by Campbell, Lo, MacKinlay.
 
 [Analysis of Integrated and Cointegrated Time Series with R](http://www.pfaffikus.de/springer.html) by Bernhard Pfaff. 
+
+[Numerical Methods of Statistics](http://goo.gl/iQsHCk) by John F. Monahan. 
 
