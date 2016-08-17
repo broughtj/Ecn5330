@@ -16,7 +16,7 @@ title: Financial Econometrics
 The following are not required, but suggested for the serious student, especially if you are considering graduate
 school. I will present some material based on them.
 
-[Causal Inference in Statistics: A Primer](http://bayes.cs.ucla.edu/PRIMER/) by Pearl, Glymour, and Jewell.
+[Bayesian Econometrics](http://www.wiley.com/WileyCDA/WileyTitle/productCd-0470845678.html) by Gary Koop.
 
 [Machine Learning: a Probabilistic Perspective](https://www.cs.ubc.ca/~murphyk/MLbook/) by Kevin P. Murphy. 
 
@@ -27,7 +27,7 @@ Students will be assigned one or more papers to be read during the week prior to
 
 ### Additional References
 
-The following are not required, but I may present material based on them. 
+The following are not required, but I may present material based on them. I list them for thoroughness and to provide a suggested reading list for the serious student. 
 
 #### Python
 
@@ -37,9 +37,13 @@ The following are not required, but I may present material based on them.
 
 #### Econometrics and Statistics 
 
+[Causal Inference in Statistics: A Primer](http://bayes.cs.ucla.edu/PRIMER/) by Pearl, Glymour, and Jewell.
+
 [The Econometrics of Financial Markets](http://press.princeton.edu/titles/5904.html) by Campbell, Lo, MacKinlay.
 
 [Analysis of Integrated and Cointegrated Time Series with R](http://www.pfaffikus.de/springer.html) by Bernhard Pfaff. 
 
 [Numerical Methods of Statistics](http://goo.gl/iQsHCk) by John F. Monahan. 
+
+
 
