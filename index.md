@@ -10,10 +10,11 @@ title: Financial Econometrics
 
 ### Prerequisites
 
-Stats xxxx (probability and statisitcs) and Math xxxx (business calculus).  
+- Statistics 2000/2300 Business Statistics
+- Math 1100 or 1210 Calculus
+- Or approval of the professor
 
-Students must be prepared to program in Python for computational assignments. 
-
+Students must be prepared to program in Python for computational assignments. No prior programming experience is required!
 
 # Instructor
 
