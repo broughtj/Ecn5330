@@ -7,7 +7,7 @@ title: Financial Econometrics
 
 # Lectures
 
-**Time and Place**: 2016 lectures are held on Mondays and Wednesdays at 7:00-8:45 am in Huntsman Hall room 360.
+**Time and Place**: 2016 lectures are held on Mondays and Wednesdays at 7:30-8:45 am in Huntsman Hall room 360.
 
 **Office hours**: By appointment
 
