@@ -18,11 +18,9 @@ school. I will present some material based on them.
 
 [Bayesian Econometrics](http://www.wiley.com/WileyCDA/WileyTitle/productCd-0470845678.html) by Gary Koop.
 
-[Machine Learning: a Probabilistic Perspective](https://www.cs.ubc.ca/~murphyk/MLbook/) by Kevin P. Murphy. 
-
-A excellent free alternative to the Murphy machine learning text is the following:
-
 [Bayesian Reasoning and Machine Learning](http://web4.cs.ucl.ac.uk/staff/D.Barber/pmwiki/pmwiki.php?n=Brml.HomePage) by David Barber.
+
+[Machine Learning: a Probabilistic Perspective](https://www.cs.ubc.ca/~murphyk/MLbook/) by Kevin P. Murphy. 
 
 
 ### Weekly Readings
