@@ -9,8 +9,8 @@ title: Financial Econometrics
 
 The focus of this course is financial econometrics. This differs from a typical introductory econometrics course in that
 the motivating examples will all come from finance. The course will cover much more on time-series econometrics than a
-typical econometrics course, and therefore less on other traditional subjects. Subthemes will be on computational
-methods, and connections to other areas of statistical practice such as data scienc and machine learning. 
+typical econometrics course, and therefore less on other traditional subjects. Sub-themes will be on computational
+methods, and connections to other areas of statistical practice such as data science and machine learning. 
 
 The course is very applied in nature. That means that I will focus more on models, methods and implementation than on
 formal proofs. We will use the EViews programs that accompany the main textbook as well as do some programming in the
