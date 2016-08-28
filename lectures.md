@@ -17,8 +17,8 @@ The course schedule is viewable as a Google Sheet [here](https://goo.gl/IFngkJ).
 
 ---
 
-1. **Introduction to Python**
-2. **Chapter 1: Introduction**
+1. **Chapter 1: Introduction**
+2. **Introduction to Python**
 3. **Chapter 2: Mathematical and Statistical Foundations**
 4. **Chapter 3: A Brief Overview of the Classical Linear Regression Model**
 5. **Chapter 4: Further development and analysis of the classical linear regression model**
