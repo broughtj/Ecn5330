@@ -17,5 +17,5 @@ title: Financial Econometrics
 
 
 - *Manipulation on Trial*
-	+ See [Williams](goo.gl/NWR6d4content_copyCopy short URL)
+	+ See [Williams](http://www.cambridge.org/us/academic/subjects/economics/industrial-economics/manipulation-trial-economic-analysis-and-hunt-silver-case)
 
