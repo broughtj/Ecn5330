@@ -5,12 +5,12 @@ title: Financial Econometrics
 
 ---
 
-# Economics 5330 Final Project
+## Economics 5330 Final Project
 
 - Details forthcoming 
 
 
-# Final Essays
+## Economics 5330 Final Essays
 
 - What should financial econometricians do? 
 	+ See [Buchanan](https://www.jstor.org/stable/1055931?seq=1#page_scan_tab_contents)
