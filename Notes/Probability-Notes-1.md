@@ -1,10 +1,9 @@
-=-.5in =-0.4in
+# Elementary Probability Review
 
-**Elementary Probability Review** **Economics 5330, Fall 2016**
+## Economics 5330, Fall 2016
 
 This is a review of elementary probability that will be useful for our
-study of financial econometrics. It is based on coverage Wooldridge
-(2004).
+study of financial econometrics. It is based on coverage Wooldridge (2004).
 
 Observational data sets econometrics apart from statistics. We will view
 an economic variable as an **outcome** from a **random process** not
