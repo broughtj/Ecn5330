@@ -18,7 +18,7 @@ We will use R for computational assignments in this class. R is a very powerful 
 language for statistical computing. More and more econometricians are starting to use R as well. Its great strength is
 the vast number of libraries freely available that implement statistical and econometric models and techniques. 
 
-You can download R for your platform at <r-project.org>.
+You can download R for your platform at <https::/www.r-project.org>.
 
 However, I suggest that you use the Microsoft R Open version available at <https://mran.microsoft.com/download/>. Make
 sure to download the MKL package as well. This offers optimized numerical routines that will speed up our calculations.
