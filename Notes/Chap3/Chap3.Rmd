@@ -3,6 +3,7 @@ title: "Chapter 3 - A Brief Overview of the Classical Linear Regression Model."
 author: "Tyler J. Brough"
 date: $\today{}$
 output: ioslides_presentation
+
 ---
 
 ## Estimator or Estimate?
