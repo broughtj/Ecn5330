@@ -1,7 +1,7 @@
 ---
 title: "Chapter 3 - A Brief Overview of the Classical Linear Regression Model."
 author: "Tyler J. Brough"
-date: $\today{}$
+date: "September 21, 2016"
 output: ioslides_presentation
 
 ---
@@ -19,6 +19,9 @@ output: ioslides_presentation
 
 - We observe data for $x_{t}$, but since $y_{t}$ also depends on $u_{t}$, we must be specific about how the $u_{t}$ are
   generated.
+
+
+## 
 
 - We usually make the following set of assumptions about the $u_{t}$'s (the unobservable error terms):
 
@@ -63,7 +66,7 @@ output: ioslides_presentation
   and $Var(u_{t}) = \sigma^{2} < \infty$ to prove this. Consistency implies that:
 
 $$
-\lim_{T \rightarrow \infty} Pr[|\hat{\beta} - \beta| > \delta] = 0 \quad \forevery \delta > 0
+\lim_{T \rightarrow \infty} Pr[|\hat{\beta} - \beta| > \delta] = 0 \quad \forall \quad \delta > 0
 $$
 
 
