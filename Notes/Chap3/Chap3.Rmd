@@ -1,0 +1,76 @@
+---
+title: "Chapter 3 - A Brief Overview of the Classical Linear Regression Model."
+author: "Tyler J. Brough"
+date: $\today{}$
+output: ioslides_presentation
+---
+
+## Estimator or Estimate?
+
+- ___Estimators___ are the formulae used to calculate the coefficients
+
+- ___Estimates___ are the actual numerical values for the coefficients
+
+
+## The Assumptions Underlying the Classical Linear Regression Model (CLRM)
+
+- The model which we have used is known as the classical linear regression model.
+
+- We observe data for $x_{t}$, but since $y_{t}$ also depends on $u_{t}$, we must be specific about how the $u_{t}$ are
+  generated.
+
+- We usually make the following set of assumptions about the $u_{t}$'s (the unobservable error terms):
+
+| Technical Notation            | Interpreation                                                                |
+|:-----------------------------:|:-----------------------------------------------------------------------------|
+| (1) $E(u_{t}) = 0$            | The errors have zero mean                                                    |
+| (2) $var(u_{t}) = \sigma^{2}$ | The variance of the errors is constant and finite over all values of $x_{t}$ |
+| (3) $cov(u_{i}, u_{j}) = 0$   | The errors are linearly independent of one another                           |
+| (4) $cov(u_{t}, x_{t}) = 0$   | There is no relationship between the error and corresponding $x$ variate     |
+
+
+## The Assumptions Underlying the Classical Linear Regression Model (CLRM) Continued
+
+- An alternative assumption to (4), which is slightly stronger, is that the $x_{t}$'s are non-stochastic or fixed in
+  repeated samples.
+
+- A fifth assumption is required if we want to make inferences about the population parameters (the actual $\alpha$ and
+  $\beta$) from the sample parameters ($\hat{\alpha}$ and $\hat{\beta}$).
+
+- Addition assumption
+	+ (5) $u_{t}$ is normally distributed
+
+## Properties of the OLS Estimator
+
+- If assumptions (1) through (4) hold, then the estimators determined by OLS are known as Best Linear Unbiased Estimator
+  (BLUE).
+
+- ___Estimator___: $\hat{\alpha}$ and $\hat{\beta}$ are estimators of the true value of $\alpha$ and $\beta$.
+
+- ___Linear___: $\hat{\alpha}$ and $\hat{\beta}$ are linear estimators.
+
+- ___Unbiased___: on average, the actual values of $\hat{\alpha}$ and $\hat{\beta}$ will be equal to their true values.
+
+- ___Best___: means that the OLS estimator $\hat{\beta}$ has minimum variance among the class of linear unbiased
+  estimators; the Gauss-Markov theorem proves that the OLS estimator is best.
+
+
+## Constitency, Unbiasedness, Efficiency
+
+- ___Consistent___: the least squares estimators $\hat{\alpha}$ and $\hat{\beta}$ are consistent. That is, the estimates
+  will converge to their true values as the sample size increases to infinity. Need the assumptions $E(x_{t} u_{t}) = 0$
+  and $Var(u_{t}) = \sigma^{2} < \infty$ to prove this. Consistency implies that:
+
+$$
+\lim_{T \rightarrow \infty} Pr[|\hat{\beta} - \beta| > \delta] = 0 \quad \forevery \delta > 0
+$$
+
+
+
+
+
+
+
+
+
+
