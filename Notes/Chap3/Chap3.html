@@ -114,26 +114,26 @@
 </ul>
 
 <table class = 'rmdtable'>
-<col width="28%" />
-<col width="71%" />
+<col width="26%" />
+<col width="73%" />
 <tr class="header">
-<th align="center">Technical Notation</th>
+<th align="left">Technical Notation</th>
 <th align="left">Interpreation</th>
 </tr>
 <tr class="odd">
-<td align="center">(1) \(E(u_{t}) = 0\)</td>
+<td align="left">(1) \(E(u_{t}) = 0\)</td>
 <td align="left">The errors have zero mean</td>
 </tr>
 <tr class="even">
-<td align="center">(2) \(var(u_{t}) = \sigma^{2}\)</td>
+<td align="left">(2) \(var(u_{t}) = \sigma^{2}\)</td>
 <td align="left">The variance of the errors is constant and finite over all values of \(x_{t}\)</td>
 </tr>
 <tr class="odd">
-<td align="center">(3) \(cov(u_{i}, u_{j}) = 0\)</td>
+<td align="left">(3) \(cov(u_{i}, u_{j}) = 0\)</td>
 <td align="left">The errors are linearly independent of one another</td>
 </tr>
 <tr class="even">
-<td align="center">(4) \(cov(u_{t}, x_{t}) = 0\)</td>
+<td align="left">(4) \(cov(u_{t}, x_{t}) = 0\)</td>
 <td align="left">There is no relationship between the error and corresponding \(x\) variate</td>
 </tr>
 </table>
@@ -143,13 +143,7 @@
 <ul>
 <li><p>An alternative assumption to (4), which is slightly stronger, is that the \(x_{t}\)&#39;s are non-stochastic or fixed in repeated samples.</p></li>
 <li><p>A fifth assumption is required if we want to make inferences about the population parameters (the actual \(\alpha\) and \(\beta\)) from the sample parameters (\(\hat{\alpha}\) and \(\hat{\beta}\)).</p></li>
-<li>Addition assumption
-
-<ul>
-<li><ol>
-<li>\(u_{t}\) is normally distributed</li>
-</ol></li>
-</ul></li>
+<li><p>Addition assumption: (5) \(u_{t}\) is normally distributed</p></li>
 </ul>
 
 </article></slide><slide class=''><hgroup><h2>Properties of the OLS Estimator</h2></hgroup><article  id="properties-of-the-ols-estimator">
@@ -170,7 +164,48 @@
 
 <p>\[
 \lim_{T \rightarrow \infty} Pr[|\hat{\beta} - \beta| &gt; \delta] = 0 \quad \forall \quad \delta &gt; 0
-\]</p></article></slide>
+\]</p>
+
+<ul>
+<li><strong><em>Unbiased</em></strong>: The least squares estimates of \(\hat{\alpha}\) and \(\hat{\beta}\) are unbiased. That is \(E(\hat{\alpha}) = \alpha\) and \(E(\hat{\beta}) = \beta\). Thus on average the estimated value will be equal to the true values. To prove this also requires the assumption that \(E(u_{t}) = 0\). Unbiasedness is a stronger condition than consistency.</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Constitency, Unbiasedness, Efficiency Continued</h2></hgroup><article  id="constitency-unbiasedness-efficiency-continued">
+
+<ul>
+<li><strong><em>Efficiency</em></strong>: An estimator \(\hat{\beta}\) of parameter \(\beta\) is said to be efficient if it is unbiased and no other unbiased estimator has a smaller variance. If the estimator is efficient, we are minimizing the probability that it is a long way off from the true value of \(\beta\).</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Precision and Standard Errors</h2></hgroup><article  id="precision-and-standard-errors">
+
+<ul>
+<li><p>Any set of regression estimates of \(\alpha\) and \(\beta\) are specific to the sample used in their estimation.</p></li>
+<li><p>Recall that the estimators of \(\alpha\) and \(\beta\) from the sample parameters (\(\hat{\alpha}\) and \(\hat{\beta}\)) are given by</p></li>
+</ul>
+
+<p>\[
+\hat{\beta} = \frac{\sum x_{t} y_{t} - T \bar{x y}}{\sum x_{t}^{2} - T \bar{x}^{2}} 
+\]</p>
+
+<p>and</p>
+
+<p>\[
+\hat{\alpha} = \bar{y} - \hat{\beta} \bar{x}
+\]</p>
+
+</article></slide><slide class=''><hgroup><h2>Precision and Standard Errors Continued</h2></hgroup><article  id="precision-and-standard-errors-continued">
+
+<ul>
+<li>What we need is some measure of the reliability or precision of the estimators (\(\hat{\alpha}\) and \(\hat{\beta}\)). The precision of the estimate is given by its standard error. Given assumptions (1) - (4) above, then the standard errors can be shown to be given by</li>
+</ul>
+
+$$
+
+
+
+<p>$$</p>
+
+<p>where \(s\) is the estimated standard deviation of the residuals.</p></article></slide>
 
 
   <slide class="backdrop"></slide>

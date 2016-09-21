@@ -26,7 +26,7 @@ output: ioslides_presentation
 - We usually make the following set of assumptions about the $u_{t}$'s (the unobservable error terms):
 
 | Technical Notation            | Interpreation                                                                |
-|:-----------------------------:|:-----------------------------------------------------------------------------|
+|:---------------------------|:-----------------------------------------------------------------------------|
 | (1) $E(u_{t}) = 0$            | The errors have zero mean                                                    |
 | (2) $var(u_{t}) = \sigma^{2}$ | The variance of the errors is constant and finite over all values of $x_{t}$ |
 | (3) $cov(u_{i}, u_{j}) = 0$   | The errors are linearly independent of one another                           |
@@ -41,8 +41,8 @@ output: ioslides_presentation
 - A fifth assumption is required if we want to make inferences about the population parameters (the actual $\alpha$ and
   $\beta$) from the sample parameters ($\hat{\alpha}$ and $\hat{\beta}$).
 
-- Addition assumption
-	+ (5) $u_{t}$ is normally distributed
+- Addition assumption: (5) $u_{t}$ is normally distributed
+
 
 ## Properties of the OLS Estimator
 
@@ -69,12 +69,46 @@ $$
 \lim_{T \rightarrow \infty} Pr[|\hat{\beta} - \beta| > \delta] = 0 \quad \forall \quad \delta > 0
 $$
 
+- ___Unbiased___: The least squares estimates of $\hat{\alpha}$ and $\hat{\beta}$ are unbiased. That is $E(\hat{\alpha}) = \alpha$ and $E(\hat{\beta}) = \beta$. Thus on average the estimated value will be equal to the true values. To prove this also requires the assumption that $E(u_{t}) = 0$. Unbiasedness is a stronger condition than consistency. 
 
 
+## Constitency, Unbiasedness, Efficiency Continued
+
+- ___Efficiency___: An estimator $\hat{\beta}$ of parameter $\beta$ is said to be efficient if it is unbiased and no other unbiased estimator has a smaller variance. If the estimator is efficient, we are minimizing the probability that it is a long way off from the true value of $\beta$. 
 
 
+## Precision and Standard Errors
+
+- Any set of regression estimates of $\alpha$ and $\beta$ are specific to the sample used in their estimation. 
+
+- Recall that the estimators of $\alpha$ and $\beta$ from the sample parameters ($\hat{\alpha}$ and $\hat{\beta}$)
+  are given by
+
+$$
+\hat{\beta} = \frac{\sum x_{t} y_{t} - T \bar{x y}}{\sum x_{t}^{2} - T \bar{x}^{2}} 
+$$
+
+and
+
+$$
+\hat{\alpha} = \bar{y} - \hat{\beta} \bar{x}
+$$
 
 
+## Precision and Standard Errors Continued
+
+- What we need is some measure of the reliability or precision of the estimators ($\hat{\alpha}$ and $\hat{\beta}$). The precision of the estimate is given by its standard error. Given assumptions (1) - (4) above, then the standard errors can be shown to be given by 
+
+$$
+\begin{align*}
+SE(\hat{\alpha}) &= s \sqrt{\frac{\sum x_{t}^{2}}{T \sum(x_{t} - \bar{x})^{2}}} = s
+\sqrt{\frac{x_{t}^{2}}{T ((\sum x_{t}^{2}) - T \bar{x}^{2})}} \\
+
+SE(\hat{\beta}) &= s \sqrt{\frac{1}{\sum(x_{t} - \bar{x})^{2}}} = s \sqrt{\frac{1}{\sum x_{t}^{2} - T \bar{x}^{2}}}
+\end{align*}
+$$
+
+where $s$ is the estimated standard deviation of the residuals.
 
 
 
