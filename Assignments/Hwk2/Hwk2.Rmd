@@ -1,0 +1,117 @@
+---
+title: "Economics 5330 - Homework 2"
+author: "Tyler J. Brough PhD"
+date: "October 4, 2016"
+output: word_document
+---
+
+## Problem 1
+
+In this first exercise you will have an opportunity to put into practice your understanding of the Classical Linear Regression Model (CLRM). Your task is to estimate the Capital Asset Pricing Model for 4 stocks: Ford, GE, Microsoft, and Oracle.
+
+Recall, that the CAPM model can be stated as:
+
+$$
+E(R_{i}) = R_{f} + \beta [E(R_{m}) - R_{f}]
+$$
+
+Where:
+
+- $E(R_{i})$ is the expected return on asset $i$
+- $R_{f}$ is the risk-free rate
+- $E(R_{m})$ is the expected return on the market portfolio
+- $\beta$ is the so-called "beta" coefficient
+
+The model can be stated in terms of excess returns as follows:
+
+$$
+E(R_{i}) - R_{f}  =  \beta [E(R_{m}) - R_{f}]
+$$
+
+Then when we run the model as a version of the CLRM we have a built in test. If the estimated intercept coefficient (the $\alpha$) from the regression isn't zero then the model is misspecified. We can also test the statistical significance of the $\beta$ coefficient with the standard test. 
+
+The data are in terms of price, so you will need to convert prices to returns. Convert prices to continuously compounded returns by taking natural log differences as follows:
+
+$$
+\ln{(p_{t})} - \ln{(p_{t-1})}
+$$
+
+where $p_{t}$ is the price at time $t$. 
+
+The last column of the dataset is the three-month treasury note yield. Use it as your proxy for the risk-free rate. It is expressed in terms of percentage. Convert it to decimal. 
+
+Estimate the CAPM model for each of the four stocks. Write up your interpretation of the model fit, and include the following:
+
+- interpret the estimated coefficients
+- interpret the standard errors (coefficients and model)
+- perform standard hypothesis tests and interpret
+- calculate 90%, 95%, and 99% confidence intervals for the estimated coefficients
+- write up the results of the fitted model in prose as if you were writing a report for your boss or for an academic research paper
+
+
+### Notes
+
+You can read the data into a data frame as follows:
+
+```{R}
+capm.data <- read.csv("capm.csv")
+```
+
+And you can check the data set by looking at the top of the data frame as follows:
+
+```{r}
+head(capm.data)
+```
+
+And the bottom of the data frame as follows:
+
+```{r}
+tail(capm.data)
+```
+
+If you require a refresher on the CAPM the wikipedia article is a good place to start: <https://en.wikipedia.org/wiki/Capital_asset_pricing_model>
+
+
+## Problem 2
+
+In this exercise you will investigate the possible problems that can arise in classical hypothesis testing. It is called Lindley's Paradox. We will explain it in greater detail later after we've seen Bayesian inference. In this exercise you will simulate from the CLRM.
+
+Set up the simulation as follows:
+
+```{r}
+alpha = 0.0
+beta = 0.97
+```
+
+Then you can run a single run of the simulation as follows:
+
+```{r}
+x <- runif(100)
+u <- rnorm(100)
+y <- alpha + beta * x + u
+```
+
+Notice that the chosen value for $\beta$ is very close to $1.0$. Test the following hypothesis:
+
+$$
+H_{0}: \beta = 1.0
+$$ 
+
+Against the alternative hypothesis:
+
+$$
+H_{1}: \beta \ne 1.0
+$$
+
+Change the value of the number of simulations until reject the null hypothesis by values of powers of 10. Start with $1,000$ observations, then $10,000$, etc. How much data do you need to reject the null? 
+
+Next, set $\beta = 0.98$, and $\beta = 0.99$. Repeat the exercise for each. What do you conclude in each case? What does that tell you? Interpret the Monte Carlo simulation results in prose. 
+
+
+
+
+
+
+
+
+
