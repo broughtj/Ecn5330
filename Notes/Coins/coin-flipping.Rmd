@@ -284,10 +284,10 @@ Further, we might think of the variable $n = a + b$ as our virtual number of fli
 Solving these two equations gives us:
 
 $$
-\begin{align}
+\begin{aligned}
 a &= m \times n \\
 b &= (1 - m) \times n
-\end{align}
+\end{aligned}
 $$
 
 
@@ -296,11 +296,11 @@ $$
 Now we have the likelihood function and a natural conjugate prior. Let's use Bayes' Rule to derive the posterior distribution. 
 
 $$
-\begin{align}
+\begin{aligned}
 p(\theta | D) & \propto p(D | \theta) \times p(\theta) \\
               & \propto [\theta^{N_{1}} (1 - \theta)^{N_{0}}][\theta^{(a - b)}(1 - \theta)^{(b - 1)}] \\
               & = \theta^{N_{1} + a - 1} (1 - \theta)^{N_{0} + b - 1}
-\end{align}
+\end{aligned}
 $$
 
 ___Note:___ this is a $Beta(\theta | N_{1} + a, N_{0} + b)$ distribution, which demonstrates that it is conjugate (i.e. of the same form as the prior).
