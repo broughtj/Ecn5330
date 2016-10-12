@@ -1,0 +1,400 @@
+---
+title: "Economics 5330: Bayesian Inference for Coin Flipping"
+author: "Tyler J. Brough"
+date: "October 11, 2016"
+output: pdf_document 
+---
+
+
+# Introduction
+
+I would like to take a step back and consider the process of Bayesian inference in a simpler model. We will first consider the simple case of flipping a coin and estimating the proportion of heads. Let $Y \in \{0,1\}$ be our random variable for the outcome of a coin flip where $y = 1$ stands for heads and $y = 0$ stands for tails. 
+
+We will first consider the case where we have a fair coin. That is, where $\theta = 0.5$, and $\theta$ is the proportion of heads in the total number of flips. By definition, each flip is independent of the last. We usually model coin flipping with the _Binomial distribution_. So we will first take some time to understand the basic details of that particular distribution. 
+
+Note that we are no so interested in the coin flipping problem per se, but rather are interested in it because it offers a simple setting in which to come to grips with the process of Bayesian statistical inference. Although, the binomial distribution does play an important role in finance, and coin flipping can be replaced in a more general setting for any binary outcome. Therefore, the process of statistical inference that we derive for coin flipping can apply much more broadly to more interesting questions. Here are some examples of binary random variables that we might be interested in:
+
+- The existence of God
+
+- In a two-party election, what is the probability that a person will vote for each candidate?
+
+- If you are an airline analyst, what is the probability that a passenger will show up for his flight? Should you overbook? By how much?
+
+- For a given job training program, what is the probability that we will see at least a $10\%$ improvement?
+
+- For a given survey question, what is the probability that a respondent will agree or disagree?
+
+- If you teach R programming your econometrics class, what is the probability that a student will become confused?
+
+## The Bernoulli and Binomial Distributions
+
+Please see the following Wikipedia artciles on the _Bernoulli_ and _Binomial_ distributions:
+
+- The Bernoulli distribution: <https://en.wikipedia.org/wiki/Bernoulli_distribution>
+
+- The Binomial distribution: <https://en.wikipedia.org/wiki/Binomial_distribution>
+
+### The Bernoulli Distribution
+
+Consider flipping a coin a single time and recording the outcome. Let the random variable $Y$ represent the outcome of the single flip. Also let $\theta$ be the probability of the coin landing on heads (if it is a fair coin, then $\theta = 0.5$). Then we can say the following:
+
+- $p(y = 1 | \theta) = \theta$
+
+- $p(y = 0 | \theta) = 1 - \theta$
+
+We can combine these equations as follows:
+
+$$
+p(y | \theta) = \theta^{y} (1 - \theta)^{(1 - y)}
+$$
+
+This is the _Bernoulli distribution_ for $Y \in \{0,1\}$ and $0 \le \theta \le 1$. 
+
+We can show that:
+
+- $E(X) = \theta$
+
+- $Var(X) = \theta (1 - \theta)$
+
+Note that when $y = 1$ the expression simplifies to $\theta$, and when $y = 1$ the expression becomes $(1 - \theta)$
+
+### The Binomial Distribution
+
+Now consider the case when we flip a coin some number of times, denote this by $N$. We might then ask how many times a heads came up in the total number of flips. In this case, $\theta$ is still the probability of heads for a single flip, but we can also interpret it as the proportion of heads in $N$ flips. Each flip is called a Bernoulli trial. So the Binomial distribution is a generalization of the Bernoulli distribution. In fact, when $N = 1$, the Binomial distribution collapses to the Bernoulli distribution. 
+
+Let $X \in \{1,\ldots,N\}$ represent the number of heads in $N$ trials. In other words, let $X = \sum\limits_{i=1}^{N} Y_{i}$, where each $Y_{i}$ is the outcome of a single trial. Then $X$ has a _Binomial_ distribution (or $X$ is distributed according to the Binomial distribution):
+
+$$
+p(X | N) = \binom{N}{X} \theta^{X} (1 - \theta)^(N - X)
+$$
+
+where 
+
+
+$$
+\binom{N}{X} = \frac{N!}{(N-X)!X!}
+$$
+
+is the number of ways to choose $X$ items from $N$.
+
+Say we have the data set $D = \{y_{1}, \ldots, y_{N}\}$ where each $y_{i}$ is the observed outcome of a single flip (i.e. a single Bernoulli trial). Notice that the likelihood function becomes:
+
+$$
+p(D | \theta) = \prod\limits_{i=1}^{N} p(y_{i} | \theta) = \prod\limits_{i=1}^{N} \theta^{y_{i}} (1 - \theta)^{(1 - y_{i})} = \theta^{N_{1}} (1 - \theta)^{N_{0}}
+$$
+
+where $N_{1} = \sum_{i} y_{i}$ is the number of heads and $N_{0} = \sum_{i} (1 - y_{i})$ is the number of tails. Obviously, $N = N_{1} + N_{0}$. 
+
+This the Binomial likelihood function for our data. 
+
+
+## Parameter Estimation
+
+Say we have a coin with probability of heads $\theta$. How do we estimate $\theta$ from a sequence of coin tosses $D = \{Y_{1}, \ldots, Y_{N}\}$, where $Y_{i} \in \{0,1\}$?
+
+### Maximum Likelihood
+
+One approach is to find a maximum likelihood estimate:
+
+$$
+\hat{\theta}_{ML} = \arg\max_{\theta} p(D | \theta)
+$$
+
+
+Given $D = \{y_{1}, \ldots, y_{N}\}$, the likelihood is 
+
+$$
+p(D | \theta) = \theta^{N_{1}} (1 - \theta)^{N_{0}}
+$$
+
+as shown above. To find the maximum likelihood it is sometimes easier to work with the log-likelihood function. 
+
+The log-likelihood function is
+
+$$
+L(\theta) = \log{p(D | \theta)} = N_{1} \log{\theta} + N_{0} \log{1 - \theta}
+$$
+
+Solving for $\frac{dL}{d\theta} = 0$ yields
+
+$$
+\hat{\theta}_{ML} = \frac{N_{1}}{N_{1} + N_{0}} = \frac{N_{1}}{N}
+$$
+
+It can be shown (although we won't here) that this estimator has all the good properties that we desire from a frequentist estimator such as unbiasedness, consistency, and efficiency. It also has the nice feature of simplicity. 
+
+Suppose we flip the coin $N = 100$ times and we observe $N_{1} = 48$ heads. Then, the maximum likelihood estimator gives us:
+
+$$
+\hat{\theta}_{ML} = \frac{N_{1}}{N} = \frac{48}{100} = 0.48 
+$$
+
+We might simulate this in R as follows:
+
+```{r}
+N = 100       # number of flips
+theta = 0.5   # a fair coin
+
+flips = rbinom(n = N, size = 1, prob = theta)
+print(flips)
+N1 <- sum(flips)
+theta.ml <- N1 / N
+print(theta.ml)
+```
+
+But what happens if we flip the coin $N = 3$ times and we observe $N_{1} = 0$ heads? Then we predict that heads are impossible!
+
+$$
+\hat{\theta}_{ML} = \frac{N_{1}}{N} = \frac{0}{3} = 0 
+$$
+
+This is known as a _sparse data problem_: if we fail to see something in our data sample, then we predict that it will never happen in the future. We will see how the Bayesian approach avoids this problem. 
+
+### Bayesian Estimation
+
+The Bayesian approach is to treat $\theta$ as an uncertain variable and to use the rules of probability to characterize that uncertainty. In addition, we can use Bayes' Rule to update our belief about $\theta$ having confronted the evidence $D = \{y_{1}, \ldots, y_{N}\}$:
+
+$$
+p(\theta | D) = \frac{p(D | \theta) p(\theta)}{\int_{\theta^{\prime}} p(\theta^{\prime}, D)}
+$$
+
+Notice that the answer to the Bayesian inference problem is an entire probability distribution that now characterizes our uncertainty regarding $\theta$ having confronted the evidence. If we wish to have a point estimate, we can report the mean or mode of the posterior distribution. We can also look at the standard deviation of the posterior distribution to give a sense of our uncertainty. 
+
+Below we will detail the process of Bayesian inference for coin flipping in some detail. We will also compare it with the maximum likelihood estimator. 
+
+# Bayesian Inference for Coin Flipping
+
+## The Likelihood Function
+
+As before, we have the Binomial likelihood function:
+
+$$
+p(D | \theta) = \theta^{N_{1}} (1 - \theta)^{N_{0}}
+$$
+
+Now that we have a good likelihood function, we turn our attention to a prior distribution that might characterize our beliefs about $\theta$ before we observe the data. We might like to use a _Natural Conjugate Prior_ distribution. For a Binomial likelihood function, one such prior distribution is the _Beta_ distribution. 
+
+Let's look at the Beta distribution next.
+
+
+## The Beta Distribution
+
+First of all, take a look at the Wikipedia article on the Beta distribution: <https://en.wikipedia.org/wiki/Beta_distribution>
+
+The Beta distribution is expressed as follows:
+
+$$
+p(\theta) = Be(\theta | a, b) = \frac{1}{B(a,b)} \theta^{(a - 1)} (1 - \theta)^{(b - 1)}
+$$
+
+for $\theta$ in the interval $[0, 1]$ and where $B(a,b)$ is known as the _Beta Function_. See the Wikipedia article here: <https://en.wikipedia.org/wiki/Beta_function>. This is a special function with the following property:
+
+$$
+B(a,b) = \int\limits_{0}^{1} \theta^{(a - 1)} (1 - \theta)^{(b - 1)} d\theta.
+$$
+
+In R the Beta function is `beta(a, b)`, and the Beta distribution is `dbeta(theta, a, b)`.
+
+___Note:___ the random variable in the Beta distribution is $\theta$, and that $a$ and $b$ are its parameters. 
+
+It turns out that we can express the Beta function in terms of another special function, the _Gamma Function_ (see here: <https://en.wikipedia.org/wiki/Gamma_function>).
+
+The Gamma function can also be expressed as an integral:
+
+$$
+\Gamma(a) = \int\limits_{0}^{\infty} t^{(a - 1)} exp(-t) dt
+$$
+
+It can be shown that 
+
+- $\Gamma(a) = (a - 1)!$
+
+- $B(a,b) = \frac{\Gamma(a) \Gamma(b)}{\Gamma(a + b)}$
+
+It can also be shown that:
+
+- $E(\theta) = \frac{a}{a + b}$
+
+The Beta distribution can generate many different shapes. Let's look at some below using some R code.
+
+Let's start off with the case when $a = b = 1$
+
+```{r}
+curve(dbeta(x, shape1 = 1, shape2 = 1), lwd = 3)
+```
+
+This turns out to be a special case of the Beta distribution known as the _Uniform_ distribution (see here: <https://en.wikipedia.org/wiki/Uniform_distribution_(continuous)>). It's called the Uniform distribution because it treats each value in the interval $[0,1]$ uniformly. That is, each value in $[0,1]$ is equally likely. Sometimes this form of the Beta prior is used to characterize complete ignorance (e.g. "I don't know, so I'll treat every value as equally likely.").
+
+Next let's look at the case when $a = b = 2$.
+
+```{r}
+curve(dbeta(x, shape1 = 2, shape2= 2), lwd = 3)
+```
+
+Here the distribution is centered around the value $\theta = 0.5$, but it is quite diffuse - expressing quite a bit of uncertainty. 
+
+Let's look at a case when we are just a bit more certain: $a = b = 4$.
+
+```{r}
+curve(dbeta(x, shape1 = 4, shape2= 4), lwd = 3)
+```
+
+And even a little bit more certain: $a = b = 8$
+
+```{r}
+curve(dbeta(x, shape1 = 8, shape2= 8), lwd = 3)
+```
+
+We can continue this process: $a = b = 16$
+
+```{r}
+curve(dbeta(x, shape1 = 32, shape2= 32), lwd = 3)
+```
+
+___Note:___ play with these plots and generate your own!
+
+We can also have a situation that is not symetric about center: $a = 2$ and $b = 4$
+
+```{r}
+curve(dbeta(x, shape1 = 2, shape2= 4), lwd = 3)
+```
+
+And the other way too!
+
+```{r}
+curve(dbeta(x, shape1 = 4, shape2= 2), lwd = 3)
+```
+
+We can even get some funkier shapes like this: $a = b = 0.5$
+
+```{r}
+curve(dbeta(x, shape1 = 0.5, shape2= 0.5), lwd = 3)
+```
+
+We can see that the Beta distribution is quite flexible and can express quite a number of different prior beliefs about $\theta$ depending on the chosen hyperparameters $a$ and $b$.
+
+One way of eliciting a prior belief about $theta$ is think about having witnessed some _virtual_ flips of the coin. For example, we might expect that it is a fair coin, so that the distribution ought to be centered around $0.5$. We might parameterize this with the variable $m$, thinking of $m$ as the mean proportion of heads in our virtual experiment:
+
+$$
+m = \frac{a}{(a + b)}
+$$
+
+Further, we might think of the variable $n = a + b$ as our virtual number of flips, and $a$ as the virtual number of heads and $b$ as the virtual number of tails. As $n$ gets larger we are expressing greater and greater confidence. However, if $n$ is small, say $n = 4$, then we might not be so confident (i.e. we are imagining only having witnessed 4 flips - it wouldn't take too much data to convince us that we are wrong). 
+
+Solving these two equations gives us:
+
+$$
+\begin{align}
+a &= m \times n \\
+b &= (1 - m) \times n
+\end{align}
+$$
+
+
+## The Posterior Distribution
+
+Now we have the likelihood function and a natural conjugate prior. Let's use Bayes' Rule to derive the posterior distribution. 
+
+$$
+\begin{align}
+p(\theta | D) & \propto p(D | \theta) \times p(\theta) \\
+              & \propto [\theta^{N_{1}} (1 - \theta)^{N_{0}}][\theta^{(a - b)}(1 - \theta)^{(b - 1)}] \\
+              & = \theta^{N_{1} + a - 1} (1 - \theta)^{N_{0} + b - 1}
+\end{align}
+$$
+
+___Note:___ this is a $Beta(\theta | N_{1} + a, N_{0} + b)$ distribution, which demonstrates that it is conjugate (i.e. of the same form as the prior).
+
+
+## Applying the Model to Coin Flipping
+
+We can now use this model to revise our beliefs as the data arrive (i.e. after each coin flip). This is called sequential analysis, and note that the Bayesian paradigm lends itself quite naturally to this kind of _on-line_ analysis due to the process of Bayesian updating. Whereas, in the frequentist case we have to precommit ourselves to conducting a study to flip the coin $N$ times, and then count the number of heads. 
+
+Let's look at an example. Suppose you start with the belief that $a = b = 2$. Then you observe the first flip $y = 1$ (a heads) to get $Beta(\theta | 3, 2)$, so the mean shifts from $E(\theta) = 2/4$ to $E(\theta | D) = 3/5$. We see that the hyperparameters $a$ and $b$ do in fact act like "pseudo counts" and correspond to "virutal" heads or tails. We might call $n = a + b$ the effective sample size (it plays a role analogous to $N = N_{1} + N_{0}$). 
+
+Let's simulate the process and see how our beliefs are updated with each flip.
+
+```{r}
+a = 2  # virtual heads
+b = 2  # virtual tails
+
+curve(dbeta(x, shape1 = a, shape2 = b), lwd = 3)
+```
+
+Now let's observe a single flip
+
+```{r}
+a <- 2
+b <- 2
+theta = 0.5 # true proportion of heads (i.e. a fair coin)
+
+y = rbinom(n = 1, size = 1, prob = theta)
+print(y)
+N1 <- y
+N0 <- 1 - y
+a.post <- N1 + a
+b.post <- N0 + b
+curve(dbeta(x, shape1 = a.post, shape2 = b.post), lwd=3)
+
+print(a.post)
+print(b.post)
+```
+
+And the next flip, this time using our previous posterior parameters as our new prior parameters.
+
+```{r}
+a <- a.post
+b <- b.post
+y = rbinom(n = 1, size = 1, prob = theta)
+print(y)
+N1 <- y
+N0 <- 1 - y
+a.post <- N1 + a
+b.post <- N0 + b
+curve(dbeta(x, shape1 = a.post, shape2 = b.post), lwd=3)
+```
+
+And so on, and so on. 
+
+
+Here is a question to think about: _if we are flipping a biased coin (say $\theta = 0.45$), which analyst will discover it first? The Bayesian, or the Frequentist?_
+
+We will discuss this example again later and show the comparison.
+
+
+Here is another question to think about: _if two Bayesians start with different prior beliefs (say the first with $B(\theta | 1, 1)$ and the second with $B(\theta | 8, 8)$) how long will it take them to converge in their beliefs?_ _Will they for sure converge?_
+
+Again, we can talk about this some more later. 
+
+One final note. The Bayesian does not have to proceed sequentially. He can process a batch of data all at once. Let's see this case, again starting with the prior $B(\theta | 2, 2)$.
+
+```{r}
+a <- 2        # prior virtual heads
+b <- 2        # prior virtual tails
+theta <- 0.5  # a true fair coin
+
+D <- rbinom(n = 10000, size = 1, prob = theta)
+N1 <- sum(D)
+N0 <- length(D) - N1
+a.post <- N1 + a
+b.post <- N0 + b
+curve(dbeta(x, shape1 = a.post, shape2 = b.post), lwd = 3)
+```
+
+__Note:__ with $N = 10000$ flips we become pretty certain after seeing the data. 
+
+Also, if we are dealing with a biased coin we will also learn that. Say the true probability of heads is $\theta = 0.65$ and that we flip the coin $N = 100$ times. 
+
+
+```{r}
+a <- 2        # prior virtual heads
+b <- 2        # prior virtual tails
+theta <- 0.65  # a true fair coin
+
+D <- rbinom(n = 100, size = 1, prob = theta)
+N1 <- sum(D)
+N0 <- length(D) - N1
+a.post <- N1 + a
+b.post <- N0 + b
+curve(dbeta(x, shape1 = a.post, shape2 = b.post), lwd = 3)
+```
