@@ -1,0 +1,99 @@
+---
+title: "The Natural Exponential Function"
+author: "Tyler J. Brough"
+date: "October 17, 2016"
+output: html_document
+---
+
+## Introduction
+
+This note is a quick introduction to the _natural exponential function_. 
+
+See the following wikipedia articles for more details:
+
+- <https://en.wikipedia.org/wiki/Exponential_function>
+
+- <https://en.wikipedia.org/wiki/E_(mathematical_constant)>
+
+
+## Exponential Functions
+
+Exponential functions take the following form:
+
+$$
+f(x) = b^{x}
+$$
+
+in which the parameter $b$ is called the base and the variable $x$ occurs as an exponent. 
+
+One particularly helpful exponential function is called the _natural exponential function_. 
+
+## Brief Review of Compounding Relations
+
+
+Recall from your introductory finance courses that we use the following formula to calculate periodic compounding:
+
+$$
+\left(1 + \frac{r}{n} \right)^{n \times T}
+$$
+
+We get more and more frequent compounding as $n$ increases for some interest rate $r$ and time horizon $T$. What happens as $n \rightarrow \infty$? We can use calculus to solve this problem. 
+
+But first, let's just use a simple computer experiment to investigate what happens. Let's look at a simplified version of the above formula:
+
+$$
+\left(1 + \frac{1}{x} \right) ^{x}
+$$
+
+For this investigation let's first set up a user-defined function in `R` for the compounding function:
+
+```{r}
+f <- function(x)
+{
+  result <- (1 + (1/x))^x
+  return(result)
+}
+```
+
+Now, let's use the function for larger and larger values of $x$. Let's increase by powers of 10 to speed things up:
+
+```{r}
+powers <- 1:8
+base <- 10
+
+for(i in powers)
+{
+  value <- f(base^i)
+  print(value)
+}
+```
+
+From this computer experiment we can see that the values converge to a certain value, which we will denote as $e \approx 2.718282$. The number $e$ is called ___Euler's number___ for the mathematician Euler who first discovered it. 
+
+This is a simple way to intuitively check the result from calculus for continuous compounding:
+
+$$
+\lim_{n \rightarrow \infty} \left(1 + \frac{r}{n} \right)^{n \times T} = e^{r \times T}
+$$
+
+
+## What is Natural about the Natural Exponential Function?
+
+So what is _natural_ about the _natural exponential function_? It's that as we let the value of $x$ go to infinity we get the exponential function with $e$ as it's base. It's thus a natural choice for the base, and we call it the natural exponential function. For finance this is indeed a natural choice as it gives continuous compounding. 
+
+It is also mathematically convenient to calculate the future value of a continuouslly compounded rate, $r$ and maturity $T$ as:
+
+$$
+FV = e^{r \times T}
+$$
+
+where $T$ is the maturity of the cash flows (expressed in annual terms, i.e. one year is $T = 1$).
+
+We can also get present values that are continuouslly compounded as follows:
+
+
+$$
+PV = e ^ {-r \times T}
+$$
+
+
