@@ -1,16 +1,20 @@
 ---
 title: "Matrix Algebra Review"
-subtitle: "Economics 5330"
 author: "Tyler J. Brough"
 date: "October 17, 2016"
 output: html_document
+subtitle: Economics 5330
 ---
 
 ## Introduction
 
 These notes give a brief overview of matrix notation and operations. These tools from mathematics become useful for the linear regression model with multiple regressands. 
 
-These notes are based on Chapter 8 of the book [Mathematics & Statistics for Financial Risk Management](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1118750292.html) by Michael B. Miller. 
+These notes are based on the following sources:
+
+- Chapter 2 of the [Brooks textbook](http://www.cambridge.org/us/academic/subjects/economics/finance/introductory-econometrics-finance-3rd-edition?format=PB)
+
+- Chapter 8 of the book [Mathematics & Statistics for Financial Risk Management](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1118750292.html) by Michael B. Miller. 
 
 
 ## Matrix Notation
@@ -88,11 +92,74 @@ $$
 \mathbf{D} + \mathbf{E} = \mathbf{E} + \mathbf{D}
 $$
 
+Matrix addition is also associative (i.e. the order in which we carry out addition is not important):
 
+$$
+\mathbf{D} + (\mathbf{E} + \mathbf{F}) = (\mathbf{D} + \mathbf{E}) + \mathbf{F}
+$$
+
+We can also multiply a matrix by a scalar. The result is a new matrix, the same size as the original, but with all the elements muliplied by the scalar value. For example, using the matrix $\mathbf{A}$ as before and $s = 10$ for the scalar value:
+
+$$
+s \times \mathbf{A} = 10 \begin{bmatrix} \phantom{-}3 & 5 \\ -9 & 3 \\ 10 & 8 \end{bmatrix} = \begin{bmatrix} \phantom{-}30 & 50 \\ -90 & 30 \\ 100 & 80 \end{bmatrix}
+$$
+
+For matrix subtraction, we simply subtract the corresponding elements in each matrix. Again, the matrices must be conformable. Using $\mathbf{D}$ and $\mathbf{E}$ as before:
+
+$$
+\mathbf{D} - \mathbf{E} = \begin{bmatrix} \phantom{-}32 & 51 \\ -10 & 0 \end{bmatrix} - \begin{bmatrix} 25 & -21 \\ 3 & \phantom{-}14 \end{bmatrix}
+$$
+
+$$
+\mathbf{D} - \mathbf{E} = \begin{bmatrix} 32-25 & 51+21 \\ -10-3 & 0-14 \end{bmatrix} 
+$$
+
+$$
+\mathbf{D} - \mathbf{E} = \begin{bmatrix} \phantom{ -}7 & \phantom{-}72 \\ -13 & -14\end{bmatrix} 
+$$
 
 
 ### Matrix Multiplication
 
+We can also multiply two matrices together. In order to carry out matrix multiplication the matrices must again be conformable. For multiplication this means that the number of columns of the first matrix must be equal to the number of rows of the second. The resulting matrix has the same number of rows as the first matrix and the same number of columns as the second matrix. For example, if we multiply a `3x2` matrix by a `2x5` matrix we obtain a `3x5`matrix. 
+
+Each entry in the resulting product matrix is the sum of the products of the corresponding elements. For example, the first element in the product matrix is the sum of the products of the corresponding elements of the first row of the first matrix and the first column of the second matrix. For example, given the matrices $\mathbf{G}$ and $\mathbf{H}$ we obtain their product as follows:
+
+$$
+\mathbf{G} = \begin{bmatrix} 6 & 1 \\ 9 & 5\end{bmatrix}, \quad \mathbf{H} = \begin{bmatrix} 2 & 3 \\ 8 & 4\end{bmatrix} 
+$$
+
+$$
+\mathbf{J} = \mathbf{G} \bullet \mathbf{H} = \begin{bmatrix} 6 & 1 \\ 9 & 5\end{bmatrix} \begin{bmatrix} 2 & 3 \\ 8 & 4\end{bmatrix} = \begin{bmatrix} 6 \bullet 2 + 1 \bullet 8 & 6 \bullet 3 + 1 \bullet 4 \\ 9 \bullet 2 + 5 \bullet 8 & 9 \bullet 3 + 5 \bullet 4 \end{bmatrix} = \begin{bmatrix} 20 & 22 \\ 58 & 47 \end{bmatrix}
+$$
+
+More formally, for the entry in $\mathbf{J}$ in the $i^{\mbox{th}}$ row and the $j^{\mbox{th}}$ column, $j_{i,j}$, we have:
+
+$$
+j_{i,j} = \sum\limits_{k=1}^{2} g_{i,k} h_{k,j}
+$$
+
+As with addition, matrix multiplication is associative:
+
+$$
+\mathbf{G} (\mathbf{H} \mathbf{J}) = (\mathbf{G} \mathbf{H}) \mathbf{J}
+$$
+
+However, matrix multiplication is ___not___ commutative:
+
+$$
+\mathbf{G} \mathbf{H} \neq \mathbf{H} \mathbf{G}
+$$
+
+___Question:___ Given the following matrices $\mathbf{M}$ and $\mathbf{N}$, find the products $\mathbf{MN}$ and $\mathbf{NM}$ and compare:
+
+$$
+\mathbf{M} = \begin{bmatrix} 3 & 5 \\ 9 & 8 \end{bmatrix}
+$$
+
+$$
+\mathbf{N} = \begin{bmatrix} 2 & 6 \\ 1 & 5 \end{bmatrix}
+$$
 
 
 ### The Zero Matrix

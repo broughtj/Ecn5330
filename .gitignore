@@ -1,2 +1,4 @@
 *.Rout
+*.Rhistory
 .DS_Store
+
