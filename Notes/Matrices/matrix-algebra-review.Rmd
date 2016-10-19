@@ -1,0 +1,101 @@
+---
+title: "Matrix Algebra Review"
+subtitle: "Economics 5330"
+author: "Tyler J. Brough"
+date: "October 17, 2016"
+output: html_document
+---
+
+## Introduction
+
+These notes give a brief overview of matrix notation and operations. These tools from mathematics become useful for the linear regression model with multiple regressands. 
+
+These notes are based on Chapter 8 of the book [Mathematics & Statistics for Financial Risk Management](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1118750292.html) by Michael B. Miller. 
+
+
+## Matrix Notation
+
+A _matrix_ is a two-dimensional array of numbers or variables. We note the size of a matrix first by its number of rows and then by its number of columns. Thus, an example of a `3 x 2` (pronounced "three by two") matrix is the following:
+
+$$
+\mathbf{A} = \begin{bmatrix} \phantom{-}3 & 5 \\ -9 & 3 \\ \phantom{-}10 & 8 \end{bmatrix}
+$$
+
+Matrices with a single column or row are called _vectors_. For example, the following is a `4 x 1` column vector:
+
+$$
+\mathbf{b} = \begin{bmatrix} \phantom{-}43 \\ \phantom{-}17 \\ -56 \\ \phantom{-}64 \end{bmatrix}
+$$
+
+We denote matrices with boldface capital letters, such as $\mathbf{A}$ and vectors with boldface lowercase letters, such as $\mathbf{b}$. The elements of a matrix are ordinary real numbers and we refer to them as _scalars_. 
+
+We can denote the various elements with subscripts as follows:
+
+$$
+\mathbf{C} = \begin{bmatrix} c_{1,1} & c_{1, 2} \\ c_{2,1} & c_{2,2} \end{bmatrix}
+$$
+
+where the first subscript $i$ in $c_{i,j}$ denotes the $i^{\text{th}}$ row and the second subscript $j$ denotes the $j^{\text{th}}$ column. 
+
+For a vector we can usually drop down to just one subscript without loss of information as follows:
+
+$$
+\mathbf{b} = \begin{bmatrix} b_{1} \\ b_{2} \\ b_{3} \\ b_{4} \end{bmatrix}
+$$
+
+Matrices such as $C$, for which there are the same number of rows as columns are called _Square matrices_. The main diagonal consists of the elements running down the diagonal from the top-left to the bottom-right. In other words, the elements $x_{i,j}$ for $i = j$. 
+
+If all of the enteries above the main diagonal are zero it is called a lower triangular matrix. The following is a `3 x 3` lower triangular matrix:
+
+$$
+\mathbf{L} = \begin{bmatrix} l_{1,1} & 0 & 0 \\ l_{2,1} & l_{2,2} & 0 \\ l_{3,1} & l_{3,2} & l_{3,3}  \end{bmatrix}
+$$
+
+Similarly, if a matrix has zero enteries below the main diagonal, it is called a _upper triangular_:
+
+$$
+\mathbf{U} = \begin{bmatrix} u_{1,1} & u_{1,2} & u_{1,3} \\ 0 & u_{2,2} & u_{2,3} \\ 0 & 0 & u_{3,3}  \end{bmatrix}
+$$
+
+If a matrix has all zero enteries except for the main diagonal it is called a _diagonal matrix_. The following are diagonal matrices:
+
+$$
+\begin{bmatrix} 15 & \phantom{-}0 & 0 \\ 0 & -9 & 0 \\ 0 & \phantom{-}0 & 2\end{bmatrix} \begin{bmatrix} 5.6 & 0 \\ 0 & 23.9 \end{bmatrix} \begin{bmatrix} 47 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 3\end{bmatrix}
+$$
+
+## Matrix Operations
+
+Just as we can add, subtract and multiply scalars we can do similar operations for matrices. Instead of matrix division, we speak of matrix inversion, which is analogous. There are additional matrix operations, such as the transpose, that are unique to matrices.
+
+
+### Matrix Addition
+
+To add matrices we simply add the corresponding elements in each matrix. But to do so, they have to be _conformable_. That is, each matrix must have the same size. For example, suppose we have the following two matrices, $\mathbf{D}$ and $\mathbf{E}$:
+
+$$
+\mathbf{D} = \begin{bmatrix} \phantom{-}32 & 51 \\ -10 & 0 \end{bmatrix} \quad \mbox{,} \quad \mathbf{E} = \begin{bmatrix} 25 & -21 \\ 3 & \phantom{-}14 \end{bmatrix}
+$$
+
+We add them as follows:
+
+$$
+\mathbf{D} + \mathbf{E} = \begin{bmatrix} (d_{1,1} + e_{1,1}) & (d_{1,2} + e_{1,2}) \\ (d_{2,1} + e_{2,1}) & (d_{2,2} + e_{2,2}) \end{bmatrix} = \begin{bmatrix} 57 & 30 \\ -7 & 14 \end{bmatrix}
+$$
+
+You can check that matrix multiplication is commutative, i.e., that the order does not matter when we add them:
+
+$$
+\mathbf{D} + \mathbf{E} = \mathbf{E} + \mathbf{D}
+$$
+
+
+
+
+### Matrix Multiplication
+
+
+
+### The Zero Matrix
+
+
+### The Transpose
