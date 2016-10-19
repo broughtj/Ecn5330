@@ -2,7 +2,7 @@
 title: "Matrix Algebra Review"
 author: "Tyler J. Brough"
 date: "October 17, 2016"
-output: html_document
+output: pdf_document
 subtitle: Economics 5330
 ---
 
@@ -161,8 +161,123 @@ $$
 \mathbf{N} = \begin{bmatrix} 2 & 6 \\ 1 & 5 \end{bmatrix}
 $$
 
+A square matrix is one that has the same number of rows and columns. Thus, it can always be multiplied by itself. Also, because the resulting matrix has the same size we can also multiply the resulting product matrix by the original, and so on and so on. We denote this with an exponent:
+
+$$
+\mathbf{M} \mathbf{M} = \mathbf{M}^{2}
+$$
+
+$$
+\mathbf{M} \mathbf{M} \mathbf{M} = \mathbf{M}^{3}
+$$
+
+There is a distributive law for matrix multiplication, too. Assuming the matrices are conformable, we have:
+
+$$
+\mathbf{F} (\mathbf{D} + \mathbf{E}) = \mathbf{F} \mathbf{D} + \mathbf{F} \mathbf{E}
+$$
+
+$$
+(\mathbf{M} + \mathbf{N}) \mathbf{P} = \mathbf{M} \mathbf{P} + \mathbf{N} \mathbf{P}
+$$
+
+Beware! Because matrix multiplication is involved order very much matters!!
+
+One special matrix that comes up quite often is called the _identity matrix_. The identity matrix is a diagonal matrix with $1$'s along the main diagonal. An identity matrix with $n$ rowns and columns is typically denoted $\mathbf{I}_{n}$, or simply $\mathbf{I}$ if the number of rows and columns is implied. 
+
+
+$$
+\mathbf{I}_{2} = \begin{bmatrix} 1 & 0 \\ 0 & 1  \end{bmatrix}, \quad \mathbf{I}_{3} = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1  \end{bmatrix}
+$$
+
+When we multiply a matrix by a conformable identity matrix, the result is the original matrix. Say we have an `rxc` matrix $\mathbf{A}$, then:
+
+$$
+\mathbf{A} \mathbf{I}_{c} = \mathbf{I}_{r} \mathbf{A} = \mathbf{A}
+$$
+
+This leads to the definition of the matrix inverse. We denote the inverse of matrix $\mathbf{A}$ as $\mathbf{A}^{-1}$. If we multiply a matrix by its inverse, we get an identity matrix:
+
+$$
+\mathbf{A} \mathbf{A}^{-1} = \mathbf{A}^{-1} \mathbf{A} = \mathbf{I}
+$$
+
+___Question:___ the following matrices, $\mathbf{A}$ and $\mathbf{A}^{-1}$, are inverses of each other. Prove this by showing that the products $\mathbf{A} \mathbf{A}^{-1}$ and $\mathbf{A}^{-1} \mathbf{A}$ are both equal to the identity matrix. 
+
+$$
+\mathbf{A} = \begin{bmatrix} 1 & 4 \\ 2 & 9 \end{bmatrix}, \quad \mathbf{A}^{-1} = \begin{bmatrix} \phantom{-}9 & -4 \\ -2 & \phantom{-}1 \end{bmatrix}
+$$
+
+Not every matrix has inverse. Take the following for example:
+
+$$
+\mathbf{U} = \begin{bmatrix} 1 & 1 \\ 1 & 1 \end{bmatrix}
+$$
+
+There is no matrix we can multiply $\mathbf{U}$ by to get an identity matrix. It's easy to see that here. It's not always so apparent, so just be aware of this fact!
+
+
 
 ### The Zero Matrix
 
+In addition to the identity matrix, we will often find it convenient to define a zero matrix, where are of the elements of the matrix are zero. We will note this as a bold $\mathbf{0}$. 
+
+The zero matrix has properties similar to its scalar equivalent:
+
+$$
+\mathbf{0} \mathbf{A} = \mathbf{A} \mathbf{0} = \mathbf{0}
+$$
+
+Also, if we add the zero matrix to any other matrix we get back the original matrix.
+
+$$
+\mathbf{0} + \mathbf{A} = \mathbf{A} + \mathbf{0} = \mathbf{A}
+$$
+
 
 ### The Transpose
+
+The transpose of a matrix can be formed by swapping the columns and rows of the original matrix. For matrix $\mathbf{A}$, we denote its transpose by $\mathbf{A}^{\prime}$ (pronounced "A prime" or "A transpose"). We can easily determine each element of the transpose matrix by reversing the row index and column index of each element of the original matrix:
+
+$$
+a_{ij}^{\prime} = a_{ji}
+$$
+
+The following are examples of matrices and their tranposes:
+
+$$
+\mathbf{A} = \begin{bmatrix} \phantom{-}3 & 5 \\ -9 & 3 \\ 10 & 8 \end{bmatrix}, \quad \mathbf{A}^{\prime} = \begin{bmatrix} 3 & -9 & 10 \\ 5 & \phantom{-}3 & 8 \end{bmatrix}
+$$
+
+$$
+\mathbf{M} = \begin{bmatrix} 3 & 5 \\ 9 & 8 \end{bmatrix}, \quad \mathbf{M}^{\prime} = \begin{bmatrix} 3 & 9 \\ 5 & 8 \end{bmatrix}
+$$
+
+Note that for a square matrix, taking the transpose can be thought of as rotating elements around the main diagonal.
+
+The transpose of a transpose is the original matrix:
+
+$$
+(\mathbf{A}^{\prime})^{\prime} \mathbf{A}
+$$
+
+A square matrix that is equal to its transpose is called a _symmetric matrix_. The following are both symmetrical:
+
+$$
+\mathbf{S}_{1} = \begin{bmatrix} \phantom{-}6 & -7 \\ -7 & \phantom{-}6 \end{bmatrix}
+$$
+
+$$
+\mathbf{S}_{2} = \begin{bmatrix} 9 & \phantom{-}5 & \phantom{-}8 \\ 5 & \phantom{-}3 & -2 \\ 8 & -2 & 14 \end{bmatrix}
+$$
+
+
+
+
+
+
+
+
+
+
+
