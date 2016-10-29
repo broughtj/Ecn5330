@@ -1,0 +1,132 @@
+---
+title: "CLRM in Matrix Form"
+author: "Tyler J. Brough"
+date: "October 28, 2016"
+output: html_document
+---
+
+## The Classical Linear Regression Model in Matrix Form
+
+Now that we have seen matrices and vectors we can express the Classical Linear Regression Model (CLRM) in matrix form. With that in mind, denote the following:
+
+$$
+\mathbf{y} = \begin{bmatrix} y_{1} \\ y_{2} \\ \vdots \\ y_{T} \end{bmatrix}
+$$
+
+where $\mathbf{y}$ is a column vector containing the observed dependent variable. Next, denote by the matrix $\mathbf{X}$ the observed independent variables as:
+
+$$
+\mathbf{X} =
+  \begin{bmatrix}
+    1 & x_{1,1} & x_{2,1} & \cdots & x_{k,1}          \\
+    \vdots      & \vdots  & \vdots & \vdots  & \vdots \\ 
+    1 & x_{1,T} & x_{2,T} & \cdots & x_{k,T}
+  \end{bmatrix}
+$$
+
+where the first column is a column of $1$'s to capture the intercept.
+
+We can also denote by $\mathbf{u}$ the vector of errors as:
+
+$$
+\mathbf{u} = \begin{bmatrix} u_{1} \\ \vdots \\ u_{T}  \end{bmatrix}
+$$
+
+and the vector of parameters as:
+
+$$
+\mathbf{\beta} = \begin{bmatrix} \beta_{1} \\ \beta_{2} \\ \vdots \\ \beta_{k} \end{bmatrix}
+$$
+
+where $\beta_{1}$ is the intercept parameter and the $\beta_{i}$'s are the slope parameters. 
+
+We can then write the model as:
+
+$$
+\mathbf{y} = \mathbf{X} \mathbf{\beta} + \mathbf{u}
+$$
+
+
+## The OLS Estimators in Matrix Form
+
+Previously, the residual sum of squares, $\sum \hat{u}_{i}^{2}$ was minimized with respect to $\alpha$ and $\beta$ . Now, we can stack them in a vector as:
+
+$$
+\hat{u} = 
+ \begin{bmatrix}
+  \hat{u}_{1}^{2} \\
+  \hat{u}_{2}^{2} \\
+  \vdots          \\
+  \hat{u}_{k}^{2}
+ \end{bmatrix}
+$$
+
+The residual sum of squares (RSS) then becomes: 
+
+$$
+\hat{u}^{\prime} \hat{u} = \hat{u}_{1}^{2} + \hat{u}_{2}^{2} + \cdots + \hat{u}_{T}^{2}
+$$
+
+It can be shown that the estimator of the coefficients is the following:
+
+$$
+\hat{\beta} = 
+ \begin{bmatrix}
+  \hat{\beta}_{1} \\
+  \hat{\beta}_{2} \\
+  \vdots          \\
+  \hat{\beta}_{k}
+ \end{bmatrix} = (X^{\prime} X)^{-1} X^{\prime} y
+$$
+
+We can show this in R. Let's simulate some artificial data:
+
+```{r}
+## Set up the data and the simulation
+T <- 100
+k <- 2
+x1 <- runif(T)
+x2 <- runif(T)
+u <- rnorm(T)
+beta1 <- 1.25
+beta2 <- 2.75
+beta3 <- -4.25
+u <- matrix(u, nrow = T, ncol = 1, byrow = T)
+X <- matrix(1, nrow = T, ncol = 2+1, byrow = F)
+X[,2] <- x1
+X[,3] <- x2
+beta <- matrix(c(1.25, 2.75, -4.25), nrow = k + 1, ncol = 1)
+y <- X %*% beta + u
+
+## Calculate the coefficients
+beta.hat <- solve(t(X) %*% X) %*% t(X) %*% y
+```
+
+
+If we put the data in a DataFrame, we can verify that `lm` does these same calculations under the hood:
+
+```{r}
+data <- data.frame(y=as.numeric(y), x1=x1, x2=x2)
+fit <- lm(y ~ x1 + x2, data = data)
+summary(fit)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
