@@ -1,8 +1,8 @@
 ---
-title: "Economics 5330: Bayesian Inference for Coin Flipping"
+title: 'Economics 5330: Bayesian Inference for Coin Flipping'
 author: "Tyler J. Brough"
 date: "October 11, 2016"
-output: pdf_document 
+output: html_document
 ---
 
 

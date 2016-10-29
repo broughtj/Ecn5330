@@ -1,0 +1,32 @@
+---
+title: "The F-Test"
+author: "Tyler J. Brough"
+date: "October 28, 2016"
+output: html_document
+---
+
+## The F-Test 
+
+With the $t$-test we were able to test single hypotheses involving only one coefficient. What is we want to test multiple hypotheses simultaneously? We will use the $F$-test. 
+
+Under the $F$-test framework we will estimate two regressions, known as the unrestricted and restricted regressions respectively. The unrestricted regression is the one in which the coefficients are freely determined by the data. The restricted regression is the one in which the coefficients are restricted (i.e. some restrictions are imposed on the $\beta$'s). 
+
+The residual sum of squares from each regression are determined, and the two sums of squares are compared in the test statistic. The $F$-test statistic for testing multiple hypotheses about the coefficient estimates is given by
+
+$$
+\mbox{$\textit{test statistic}$} = \frac{RRSS - URSS}{URSS} \times \frac{T - k}{m}
+$$
+
+where the following notation applies:
+
+- $URSS$ = residual sum of squares from unrestricted regression
+
+- $RRSS$ = residual sum of squares from restricted regression
+
+- $m$ = number of restrictions
+
+- $T$ = number of observations
+
+- $k$ = number of regressors in unrestricted regression including the constant
+
+
