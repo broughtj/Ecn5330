@@ -1,0 +1,184 @@
+---
+title: 'Testing Multiple Hypotheses: The F-Test'
+author: "Tyler J. Brough"
+date: "October 31, 2016"
+output: ioslides_presentation
+---
+
+# Section 4.4
+
+## Testing Multiple Hypotheses: The *F* -test
+
+- We used the *t*-test to test single hypotheses, i.e. hypotheses involving only one coefficient. But what if we want to test more than one coefficient simultaneously?
+
+- We do this using the *F*-test. The *F*-test involves estimating the following two regressions:
+
+- The $\underline{\text{unrestricted regression}}$ - the one in which the coefficients are freely determined by the data, as we have done before.
+
+- The $\underline{\text{restricted regression}}$ - the one in which the coefficients are restricted, i.e. the restrictions are imposed on some $\beta$s.
+
+
+## The *F*-test: Restricted and Unrestricted Regressions
+
+The general regression is
+
+$$
+y_t = \beta_1 + \beta_2 x_{2t} + \beta_3 x_{3t} + \beta_4 x_{4t} + u_t
+$$
+
+- We want to test the restriction that $\beta_3+\beta_4=1$ (we have some hypothesis from theory which suggests that this would be an interesting hypothesis to study). The unrestricted regression is (13) above, but what is the restricted regression?
+
+$$
+y_t = \beta_{1} + \beta_{2} x_{2t} + \beta_{3} x_{3t} + \beta_{4} x_{4t} + u_{t} \quad \text{s.t. } \beta_{3} + \beta_{4} = 1
+$$
+
+- We substitute the restriction $(\beta_3 + \beta_4 = 1)$ into the regression so that it is automatically imposed on the data.
+
+$$
+\beta_{3} + \beta_{4} = 1 \implies \beta_{4} = 1 - \beta_{3}
+$$
+
+
+## The *F*-test: Forming the Restricted Regression
+
+$$
+ \begin{aligned}
+   y_t &=\beta_1+\beta_2x_{2t}+\beta_3x_{3t}+(1-\beta_3)x_{4t} + u_t\\
+   y_t &= \beta_1+\beta_2x_{2t}+\beta_3x_{3t}+x_{4t}-\beta_3x_{4t}+ u_t
+ \end{aligned}
+$$
+
+- Gather terms in $\beta$'s together and rearrange
+
+$$(y_t-x_{4t}) = \beta_1 +\beta_2x_{2t} + \beta_3(x_{3t}-x_{4t}) +u_t$$
+
+- This is the restricted regression. We actually estimate it by creating two new variables, call them, say, $P_t$ and $Q_t$:
+
+$$
+ \begin{aligned}
+   P_t&=y_t-x_{4t}\\
+   Q_t&=x_{3t}-x_{4t}
+ \end{aligned}
+$$
+
+So $P_t= \beta_1 +\beta_2x_{2t} +\beta_3Q_t+u_t$ is the restricted regression we actually estimate.
+
+
+## Calculating the *F* -Test Statistic
+
+The test statistic is given by
+ 
+$$\textit{test statistic} =\frac{RRSS-URSS}{URSS} \times \frac{T-k}{m}$$
+
+where 
+
+- $URSS$ is the residual sum of squares (RSS) from the unrestricted regression
+
+- $RRSS$ is the RSS from the restricted regression
+
+- $m$ is the number of restrictions
+
+- $T$ is the number of observations in the data set
+
+- $k$ is the number of regressors in the unrestricted regression, including a constant term
+
+
+## The *F*-Distribution
+
+- The test statistic follows the *F*-distribution, which has 2 d.f. parameters.
+
+- The value of the degrees of freedom parameters are *m* and $(T-k)$ respectively (the order of the d.f. parameters is important).
+
+- The appropriate critical value will be in column *m*, row $(T-k)$.
+
+- The *F*-distribution has only positive values and is not symmetrical. We therefore only reject the null if the test statistic $>$ critical *F*-value.
+
+
+## Determining the Number of Restrictions in an *F*-test
+
+Examples:
+
+| $H_0$: hypothesis                                | No. of restrictions, m |
+|--------------------------------------------------|:----------------------:|
+| $\beta_1+\beta_2=2$                              | 1                      |
+| $\beta_2=1\text{ and }\beta_3 = -1$              | 2                      |
+| $\beta_2=0, \beta_3=0, \text{ and } \beta_4 = 0$ | 3                      |
+
+## Determining the Number of Restrictions in an *F*-test Continued
+
+- If the model is $y_t = \beta_1 +\beta_2x_{2t} + \beta_3x_{3t}+\beta_{4t}x_{4t} +u_t$ then the null hypothesis $H_{0}: \beta_{2}=0, \beta_{3}=0, \beta_{4}=0$ is tested by the regression *F*-statistic. It tests the null hypothesis that all of the coefficients except the intercept coefficient are zero.
+
+- Note the form of the alternative hypothesis for all tests when more than one restriction is involved: $H_{1}: \beta_{2} \neq 0, \beta_{3} \neq 0, \beta_{4} \neq 0$
+
+
+## What we Cannot Test with Either an *F* or a *t*-test
+
+We cannot test using this framework hypotheses which are not linear or which are multiplicative, e.g.
+
+$$
+H_0: \beta_{2} \beta_{3} = 2 \quad \text{or} \quad H_0: \beta_{2}^{2}= 1
+$$
+
+cannot be tested.
+
+
+## The Relationship between the *t* and the *F*-Distributions
+
+- Any hypothesis which could be tested with a *t*-test could have been tested using an *F*-test, but not the other way around.
+
+- For example, consider the hypothesis
+
+$$
+\begin{aligned}
+ H_0: &\beta_2 = 0.5\\
+ H_1: &\beta_2 \neq 0.5
+\end{aligned}
+$$
+
+We could have tested this using the usual *t*-test: $\text{test stat} = \frac{\hat{\beta}_{2} - 0.5}{SE(\hat{\beta}_{2})}$ or it could be tested in the framework above for the *F*-test.
+
+- Note that the two tests always give the same result since the *t*-distribution is just a special case of the *F-*distribution.
+
+- For example, if we have some random variable *Z*, and $Z \sim t(T-k)$ then also $Z^{2} \sim F(1, T-k)$
+
+
+## *F*-test Example
+
+$\underline{\text{Question:}}$ Suppose a researcher wants to test whether the returns on a company stock (*y*) show unit sensitivity to two factors (factor $x_{2}$ and factor $x_{3}$) among three considered. The regression is carried out on 144 monthly observations. The regression is $y_t=\beta_1+\beta_2x_{2t}+\beta_3x_{3t}+\beta_4x_{4t}+u_t$
+
+- What are the restricted and unrestricted regressions?
+
+- If the two RSS are 436.1 and 397.2 respectively, perform the test.
+
+$\underline{\text{Solution:}}$
+
+- Unit sensitivity implies $H_0: \beta_{2} = 1$ and $\beta_{3} = 1$. The unrestricted regression is the one in the question. The restricted regression is $(y_{t} - x_{2t} - x_{3t}) = \beta_{1} + \beta_{4} x_{4t} + u_t$ or letting $z_{t} = y_{t} - x_{2t} - x_{3t}$, the restricted regression is $z_{t} = \beta_{1} + \beta_{4} x_{4t} + u_t$
+
+
+## *F*-test Example (Cont'd)
+
+In the *F*-test formula, $T = 144$, $k = 4$, $m = 2$, $RRSS  = 436.1$, $URSS = 397.2$
+
+- *F*-test statistic $= 6.68$. The critical value is an $F(2, 140)$, $F_{crit} = 3.07$ at ($5\%$) and $4.79$  at ($1\%$).
+
+**Conclusion:** Reject $H_{0}$.
+
+
+# Section 4.8
+
+## Data Mining
+
+- Data mining is searching many series for statistical relationships without theoretical justification.
+
+- For example, suppose we generate one dependent variable and twenty explanatory variables completely randomly and independently of each other.
+
+- If we regress the dependent variable separately on each independent variable, on average one slope coefficient will be significant at 5%.
+
+- If data mining occurs, the true significance level will be greater than the nominal significance level.
+
+See also this from [xkcd](https://xkcd.com/882/)
+
+
+
+
+
