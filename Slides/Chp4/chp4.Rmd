@@ -85,9 +85,9 @@ where
 
 ## The *F*-Distribution
 
-- The test statistic follows the *F*-distribution, which has 2 d.f. parameters.
+- The test statistic follows the *F*-distribution, which has two degrees of freedom (*d.f.*) parameters.
 
-- The value of the degrees of freedom parameters are *m* and $(T-k)$ respectively (the order of the d.f. parameters is important).
+- The value of the degrees of freedom parameters are *m* and $(T-k)$ respectively (the order of the *d.f.* parameters is important).
 
 - The appropriate critical value will be in column *m*, row $(T-k)$.
 
@@ -162,6 +162,34 @@ In the *F*-test formula, $T = 144$, $k = 4$, $m = 2$, $RRSS  = 436.1$, $URSS = 3
 - *F*-test statistic $= 6.68$. The critical value is an $F(2, 140)$, $F_{crit} = 3.07$ at ($5\%$) and $4.79$  at ($1\%$).
 
 **Conclusion:** Reject $H_{0}$.
+
+
+## Reporting $p$-values for $F$-tests
+
+For reporting the outcomes of $F$-tests, $p$-values are especially useful. Since the $F$ distribution depends on the numerator and denominator *d.f.*, it is difficult to get a feel for how strong or weak the evidence against the null hypothesis simply by eyeballing the value of an $F$-statistic. 
+
+The $p$-value for the $F$-test is defined as:
+
+$$
+\text{$p$-value} = P(\mathscr{F} > F)
+$$
+
+where we let $\mathscr{F}$ denote an $F$ random variable with $(m, T - k - 1)$ degrees of freedom, and $F$ is the actual value of the test statistic. 
+
+Notice: as with all Frequentist probability statements this is ___only___ a pre-sample statement. 
+
+
+## The $p$-value Continued
+
+- The $p$-value is defined as: *the smallest significance level at which the null hypothesis can be rejected. Equivalently, the largest significance level at which the null hypothesis cannot be rejected.*
+
+- The $p$-value for the default $t$-tests and $F$-tests are given automatically in the output for the `lm` command in `R`.
+
+
+## An Example
+
+
+
 
 
 # Section 4.8

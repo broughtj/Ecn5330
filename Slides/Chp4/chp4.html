@@ -76,7 +76,6 @@
   </style>
 
 
-
 </head>
 
 <body style="opacity: 0">
@@ -104,23 +103,29 @@
 <li><p>The \(\underline{\text{restricted regression}}\) - the one in which the coefficients are restricted, i.e. the restrictions are imposed on some \(\beta\)s.</p></li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>The <em>F</em> -test: Restricted and Unrestricted Regressions</h2></hgroup><article  id="the-f--test-restricted-and-unrestricted-regressions">
+</article></slide><slide class=''><hgroup><h2>The <em>F</em>-test: Restricted and Unrestricted Regressions</h2></hgroup><article  id="the-f-test-restricted-and-unrestricted-regressions">
 
 <p>The general regression is</p>
 
-<p>\[y_t = \beta_1+\beta_2x_{2t}+\beta_3x_{3t}+\beta_4x_{4t}+u_t\]</p>
+<p>\[
+y_t = \beta_1 + \beta_2 x_{2t} + \beta_3 x_{3t} + \beta_4 x_{4t} + u_t
+\]</p>
 
 <ul>
 <li>We want to test the restriction that \(\beta_3+\beta_4=1\) (we have some hypothesis from theory which suggests that this would be an interesting hypothesis to study). The unrestricted regression is (13) above, but what is the restricted regression?</li>
 </ul>
 
-<p>\[y_t = \beta_1+\beta_2x_{2t}+\beta_3x_{3t}+\beta_4x_{4t}+u_t \quad \text{s.t. } \beta_3+\beta_4 = 1\]</p>
+<p>\[
+y_t = \beta_{1} + \beta_{2} x_{2t} + \beta_{3} x_{3t} + \beta_{4} x_{4t} + u_{t} \quad \text{s.t. } \beta_{3} + \beta_{4} = 1
+\]</p>
 
 <ul>
 <li>We substitute the restriction \((\beta_3 + \beta_4 = 1)\) into the regression so that it is automatically imposed on the data.</li>
 </ul>
 
-<p>\[\beta_3+\beta_4 = 1 \implies \beta_4 = 1-\beta_3\]</p>
+<p>\[
+\beta_{3} + \beta_{4} = 1 \implies \beta_{4} = 1 - \beta_{3}
+\]</p>
 
 </article></slide><slide class=''><hgroup><h2>The <em>F</em>-test: Forming the Restricted Regression</h2></hgroup><article  id="the-f-test-forming-the-restricted-regression">
 
@@ -169,8 +174,8 @@
 </article></slide><slide class=''><hgroup><h2>The <em>F</em>-Distribution</h2></hgroup><article  id="the-f-distribution">
 
 <ul>
-<li><p>The test statistic follows the <em>F</em>-distribution, which has 2 d.f. parameters.</p></li>
-<li><p>The value of the degrees of freedom parameters are <em>m</em> and \((T-k)\) respectively (the order of the d.f. parameters is important).</p></li>
+<li><p>The test statistic follows the <em>F</em>-distribution, which has two degrees of freedom (<em>d.f.</em>) parameters.</p></li>
+<li><p>The value of the degrees of freedom parameters are <em>m</em> and \((T-k)\) respectively (the order of the <em>d.f.</em> parameters is important).</p></li>
 <li><p>The appropriate critical value will be in column <em>m</em>, row \((T-k)\).</p></li>
 <li><p>The <em>F</em>-distribution has only positive values and is not symmetrical. We therefore only reject the null if the test statistic \(&gt;\) critical <em>F</em>-value.</p></li>
 </ul>
@@ -260,6 +265,27 @@ H_0: \beta_{2} \beta_{3} = 2 \quad \text{or} \quad H_0: \beta_{2}^{2}= 1
 </ul>
 
 <p><strong>Conclusion:</strong> Reject \(H_{0}\).</p>
+
+</article></slide><slide class=''><hgroup><h2>Reporting \(p\)-values for \(F\)-tests</h2></hgroup><article  id="reporting-p-values-for-f-tests">
+
+<p>For reporting the outcomes of \(F\)-tests, \(p\)-values are especially useful. Since the \(F\) distribution depends on the numerator and denominator <em>d.f.</em>, it is difficult to get a feel for how strong or weak the evidence against the null hypothesis simply by eyeballing the value of an \(F\)-statistic.</p>
+
+<p>The \(p\)-value for the \(F\)-test is defined as:</p>
+
+<p>\[
+\text{$p$-value} = P(\mathscr{F} &gt; F)
+\]</p>
+
+<p>where we let \(\mathscr{F}\) denote an \(F\) random variable with \((m, T - k - 1)\) degrees of freedom, and \(F\) is the actual value of the test statistic.</p>
+
+<p>Notice: as with all Frequentist probability statements this is <strong><em>only</em></strong> a pre-sample statement.</p>
+
+</article></slide><slide class=''><hgroup><h2>The \(p\)-value Continued</h2></hgroup><article  id="the-p-value-continued">
+
+<ul>
+<li><p>The \(p\)-value is defined as: <em>the smallest significance level at which the null hypothesis can be rejected. Equivalently, the largest significance level at which the null hypothesis cannot be rejected.</em></p></li>
+<li><p>The \(p\)-value for the default \(t\)-tests and \(F\)-tests are given automatically in the output for the <code>lm</code> command in <code>R</code>.</p></li>
+</ul>
 
 </article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Section 4.8</h2></hgroup><article  id="section-4.8">
 
