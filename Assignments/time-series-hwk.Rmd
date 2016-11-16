@@ -1,0 +1,18 @@
+---
+title: "Economics 5330 Time Series Homework"
+author: "Tyler J. Brough"
+date: "November 16, 2016"
+output: pdf_document
+---
+
+## Time Series Homework
+
+Using the accompanying Rmarkdown document on R time series modeling complete the following:
+
+1. Choose 5 tickers and pull the data for each trading day in 2015 for each ticker using the `getSymbols` function from the `quantmod` package.
+2. Make time series and `barCharts` plots for each ticker.
+3. Extract the closing prices for each ticker and calculate log-returns.
+4. Make plots of each return series. 
+5. Make ACF and PACF plots for each returns series.
+6. Use one of the discussed methods to specify an appropriate $ARMA(p,q)$ model for each return series. 
+7. Hand in your results as an Rmarkdown document in your homework drop folder on Google Drive.

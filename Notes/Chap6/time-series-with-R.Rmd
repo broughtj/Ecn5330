@@ -1,0 +1,151 @@
+---
+title: "Univariate Time Series with R"
+author: "Tyler J. Brough"
+date: "November 16, 2016"
+output: html_document
+---
+
+## Using the Quantmod Package to Retrieve Financial Time Series
+
+First, make sure you have `quantmod` installed:
+
+```{r}
+require("quantmod")
+```
+
+If it is not, you will want to install it with:
+
+```
+$ install.packages("quantmod")
+```
+
+Once we have the package installed we can use it to pull historical stock price data. Let's use it to get some stock price data for ticker MSFT from Google Finance:
+
+```{r}
+getSymbols('MSFT', src = "google")
+```
+
+The data will be stored in an `xts` object, which we can inspect as follows:
+
+```{r}
+data.class(MSFT)
+head(MSFT)
+tail(MSFT)
+```
+
+We can specify a specific date range as follows:
+
+```{r}
+getSymbols('MSFT', src = "google", from = "2015-01-01", to = "2015-12-31")
+head(MSFT)
+tail(MSFT)
+```
+
+### Making Plots
+
+We can make very nice looking time-series plots with `xts` objects as follows:
+
+```{r}
+plot(MSFT, main = "Time Series Plot of Microsoft Prices for 2015")
+```
+
+There are additional parameters you can use to control more finely the output, so be sure to take a look at the help file for `plot.xts`. 
+
+You can also do other neat plots, such as this one:
+
+```{r}
+barChart(MSFT)
+```
+
+We can extract a single column as follows:
+
+```{r}
+prc.close <- MSFT$MSFT.Close
+plot(prc.close, main = "Microsoft Daily Prices")
+```
+
+We can also use some utility functions to transform prices into log returns as follows:
+
+```{r}
+ret.close <- diff(prc.close, log=TRUE, na.pad=FALSE)
+plot(ret.close, main = "Microsoft Daily Returns")
+```
+
+## Fitting ARMA Models
+
+First let's use the function `arima.sim` to simulate some data from a given ARMA process. 
+
+You can look at the help function for this function:
+
+```
+> help(arima.sim)
+```
+
+Let's simulate a $ARMA(2,2)$ process:
+
+```{r}
+sim.data <- arima.sim(list(ar = c(0.4, 0.4), ma = c(0.6, -0.4)), n = 10000)
+```
+
+We can see what type of object this gives us:
+
+```{r}
+data.class(sim.data)
+```
+
+It's a `ts` object, which has it's own plot function:
+
+```{r}
+plot(sim.data)
+```
+
+We can get the ACF and PACF plots as follows:
+
+```{r}
+acf(sim.data)
+pacf(sim.data)
+```
+
+Let's fit the model knowing that $p = 2$ and $q = 2$:
+
+```{r}
+fit <- arima(sim.data, order = c(2,0,2), method="ML")
+```
+
+We can retrieve the AIC and BIC:
+
+```{r}
+aic <- round(AIC(fit), 3)
+bic <- round(BIC(fit), 3)
+print(paste("The AIC is:", aic, sep=" "))
+print(paste("The BIC is:", bic, sep=" "))
+```
+
+Unfortunately, model specification requires a mixture of graphical analysis and these information criteria. For a helpful function please the following by Rob Hyndman (which utilizes his `forecast` package): <https://www.otexts.org/fpp/8/7>. 
+
+Let's try his `auto.arima` method of model building below for our simulated data:
+
+```{r}
+require(forecast)
+auto.arima(sim.data, max.p = 6, max.q = 6, stationary = TRUE, parallel=TRUE, num.cores = 8, stepwise=FALSE)
+```
+
+Recall that ARMA processes are not necessarily unique, so don't be surprised if the procedure suggests a specification that differs from our known $ARMA(2,2)$ process. In this case it chose an $ARMA(1, 2)$ model!
+
+___Note:___ also note that I set the `parallel` argument to `TRUE` and `num.cores` to $8$. This allows for the model specification search to be done in parallel. Most modern CPUs have multiple cores. You may want to set these parameters differently for your machine. If you choose not to use parallel processing you should set `stepwise=TRUE`.
+
+
+## ARMA Modeling of Microsoft Returns
+
+```{r}
+auto.arima(ret.close, max.p = 6, max.q = 6, stationary = TRUE, parallel = TRUE, num.cores = 8, stepwise = FALSE)
+```
+
+Notice that it selects an $ARMA(0,0)$ model, which essentially corresponds with the white noise process. This tends to fit with our theory from finance. 
+
+
+
+
+
+
+
