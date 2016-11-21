@@ -10,7 +10,7 @@ output: pdf_document
 First, make sure you have `quantmod` installed:
 
 ```{r}
-require("quantmod")
+suppressMessages(require("quantmod"))
 ```
 
 If it is not, you will want to install it with:
