@@ -1,0 +1,118 @@
+---
+title: "Vector Autoregressive Models"
+author: "Tyler J. Brough"
+date: "November 21, 2016"
+output: html_document 
+---
+
+## Vector Autoregressive Models
+
+Consider the following two equations:
+
+$$
+\begin{aligned}
+y_{1,t} &= a y_{1,t-1} + b y_{2,t-1} + v_{1,t} \\
+y_{2,t} &= c y_{1,t-1} + d y_{2,t-1} + v_{2,t} 
+\end{aligned}
+$$
+
+These two equations comprise a vector autoregression (VAR). A VAR is the extension of the autoregressive (AR) model to
+the case in which there is more than one variable under study. The VAR above is a bivariate VAR(1) (lag-one). Generally, a VAR can consist of $K$ variables and have $p$ lags. 
+
+In a VAR model each variable is treated as endogenous. There is one equation for each variable in the system, and each
+equation consists of lags of it's own variable plus each of the others. Technically speaking, this is called a *reduced
+form* VAR, which we will distinguish from a *structural VAR* in just a bit. 
+
+We can write the VAR(p) model more generally as:
+
+$$
+\begin{aligned}
+y_{1,t} &= \alpha_{1} + \sum\limits_{i=1}^{p} a_{1i} y_{1,t-i} + \sum\limits_{i=1}^{p} b_{1i} y_{2,t-i} + \cdots \sum\limits_{i=1}^{p} c_{1i} y_{k,t-i} + v_{1,t} \\
+y_{2,t} &= \alpha_{2} + \sum\limits_{i=1}^{p} a_{2i} y_{1,t-i} + \sum\limits_{i=1}^{p} b_{2i} y_{2,t-i} + \cdots \sum\limits_{i=1}^{p} c_{2i} y_{k,t-i} + v_{2,t} \\
+\vdots \\
+y_{k,t} &= \alpha_{k} + \sum\limits_{i=1}^{p} a_{ki} y_{1,t-i} + \sum\limits_{i=1}^{p} b_{ki} y_{2,t-i} + \cdots \sum\limits_{i=1}^{p} c_{ki} y_{k,t-i} + v_{k,t} 
+\end{aligned}
+$$
+
+We can also write the VAR model in matrix form:
+
+$$
+Y_{t} = \Gamma + A_{1} Y_{t-1} + A_{2} Y_{t-2} + \cdots + A_{p} Y_{t-p} + V_{t}
+$$
+
+Where:
+
+$$
+Y_{t} =
+ \begin{bmatrix} 
+  y_{1,t} \\
+  y_{2,t} \\
+  \vdots  \\
+  y_{k,t} 
+ \end{bmatrix}
+$$
+
+$$
+A_{i} = 
+ \begin{bmatrix}
+  a_{i,11} & a_{i,12} & \cdots & a_{i,1k} \\
+  a_{i,21} & a_{i,22} & \cdots & a_{i,2k} \\
+  \vdots                                  \\
+  a_{i,k1} & a_{i,k2} & \cdots & a_{i,kk} 
+ \end{bmatrix}
+$$
+
+$$
+V_{t} = 
+ \begin{bmatrix}
+  v_{1,t} \\
+  v_{2,t} \\
+  \vdots  \\
+  v_{k,t}
+ \end{bmatrix}
+$$
+
+
+
+### Typical Uses of VAR Models
+
+VARs are the one of the most important econometric tools in empirical macroeconomics and finance. They have three main
+uses:
+
+1. Forecasting
+2. Impulse Response Functions
+3. Forecast Error Variance Decomposition
+
+We will focus on using the VAR for calculating Impulse Response Functions (IRFs).
+
+Please see [Stock and Watson](http://www.jstor.org/stable/2696519?seq=1#page_scan_tab_contents) for a very nice overview of VAR modeling. 
+
+### VAR Estimation 
+
+It turns out that the VAR model, at least as we have presented it here, is a special case of a more general model called
+a Seemingly Unrelated Regressions (SUR) Model. The VAR is a SUR model for which the right-hand side variables are all
+the same in each equation. When that is the case there is no added benefit from systems estimation, so we can estimate
+the VAR model by applying OLS regression equation-by-equation. 
+
+An example of estimating a VAR model in R will be given below.
+
+### Forecast Error Variance Decomposition
+
+
+
+### Impulse Response Functions
+
+
+### Hasbrouck's VAR 
+
+
+### VARs in R
+
+```{r}
+suppressMessages(require(vars))
+```
+
+
+
+
+
