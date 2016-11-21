@@ -1,4 +1,6 @@
 *.Rout
 *.Rhistory
 .DS_Store
+*.aux
+*.log
 
