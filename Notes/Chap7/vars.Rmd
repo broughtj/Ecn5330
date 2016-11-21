@@ -2,7 +2,7 @@
 title: "Vector Autoregressive Models"
 author: "Tyler J. Brough"
 date: "November 21, 2016"
-output: html_document 
+output: pdf_document 
 ---
 
 ## Vector Autoregressive Models
