@@ -96,22 +96,87 @@ the VAR model by applying OLS regression equation-by-equation.
 
 An example of estimating a VAR model in R will be given below.
 
-### Forecast Error Variance Decomposition
-
-
 
 ### Impulse Response Functions
 
+In applied work, it is often of interest to know the _response_ of one variable to _impulse_ in another variable in a system
+containing a number of further variables. If there is a reaction in the one variable due to an impulse in the other
+variable one might call the latter causal for the former. This kind of analysis is sometimes called _dynamic multiplier
+analysis_. 
 
-### Hasbrouck's VAR 
+Imagine we are given the following three-variable lag-three VAR model:
+
+$$
+\begin{bmatrix} y_{1,t} \\ y_{2,t} \\ y_{3,t} \end{bmatrix} = \begin{bmatrix} .5 & 0 & 0 \\ .1 & .1 & .3 \\ 0 & .2 & .3  \end{bmatrix} \begin{bmatrix} y_{1,t-1} \\ y_{2,t-1} \\ y_{3,t-1}
+\end{bmatrix} + \begin{bmatrix} u_{1,t} \\ u_{2,t} \\ u_{3,t}   \end{bmatrix}
+$$
+
+___Note:___ Here we are not worrying about estimation, and we are assuming we know the "true" form of the $A_{1}$ matrix. 
+
+Tracing out a unit shock in the first variable in period $t = 0$ in this system we get
+
+$$
+y_{0} = \begin{bmatrix} y_{1,0} \\ y_{2,0} \\ y_{3,0} \end{bmatrix} = \begin{bmatrix} u_{1,0} \\ u_{2,0} \\ u_{3,0}   \end{bmatrix} = \begin{bmatrix} 1 \\ 0 \\ 0  \end{bmatrix}
+$$
+
+$$
+y_{1} = \begin{bmatrix} y_{1,1} \\ y_{2,1} \\ y_{3,1} \end{bmatrix} = A_{1} y_{0} = \begin{bmatrix} .5 \\ .1 \\ 0  \end{bmatrix}
+$$
+
+$$
+y_{2} = \begin{bmatrix} y_{1,2} \\ y_{2,2} \\ y_{3,2} \end{bmatrix} = A_{1} y_{1} = A_{1}^{2} y_{0} = \begin{bmatrix} .25 \\ .06 \\ .02  \end{bmatrix}
+$$
+
+Continuing in this manner, it turns out that $y_{i} = (y_{1,i}, y_{2,i}, y_{3,i})^{\prime}$ is just the first column of $A_{1}^{i}$. It turns out that a unit shock in $y_{2,t}$ ($y_{3,t}$) at $t = 0$ after $i$ periods, results in a vector $y_{i}$ which is just the second (third) column of $A_{1}^{i}$. Thus, the elements of $A_{1}^{i}$ represent the effects of the unit shocks in the variables of the system after $i$ periods. Therefore, they are called impulse responses or dynamic multipliers. 
+
+This is the simplest way to see how impulse responses work, but usually they are calculated from the Vector Moving Average form of the VAR model. Just as with a univariate $AR(p)$ model, a $VAR(p)$ model can be inverted to an infinite-order $VMA(\infty)$ model. The coeficients of the VMA model are the dynamic multipliers. 
 
 
-### VARs in R
+### VAR Modeling in R
 
 ```{r}
 suppressMessages(require(vars))
 ```
 
+We can look at the use of VAR models in R with the `vars` package and its builtin data set on the Canadian macroeconomy. 
+
+```{r}
+data(Canada)
+```
+
+First let's use the AIC to specify a proper number of lags, choosing $10$ as the maximum possible lag:
+
+```{r}
+VARselect(Canada, lag.max = 10, type = "const")
+```
+
+The AIC selects a $p = 3$ order model, which we can now fit as follows:
+
+```{r}
+fit <- VAR(Canada, p = 3, type = "const")
+summary(fit)
+```
+
+As you can see the `summary` function gives a lot of output information. We can see the details of the dataset as follows:
+
+```{r}
+help(Canada)
+```
+
+Let's look at the effects of a unit shock in the `prod` variable to the `e` variable by calculating the impulse response function out just a few steps for presentation purposes:
+
+```{r}
+irf(fit, impulse = "prod", response = "e", n.ahead = 10)
+```
+
+We can also plot the IRF:
+
+```{r}
+irf.e <- irf(fit, impulse = "prod", response = "e", n.ahead = 100)
+plot(irf.e)
+```
+
+As you can see, R makes VAR modeling simple. The key trick is understanding what you are doing!
 
 
 

@@ -189,16 +189,249 @@ V_{t} =
 </div>
 <div id="var-estimation" class="section level3">
 <h3>VAR Estimation</h3>
+<p>It turns out that the VAR model, at least as we have presented it here, is a special case of a more general model called a Seemingly Unrelated Regressions (SUR) Model. The VAR is a SUR model for which the right-hand side variables are all the same in each equation. When that is the case there is no added benefit from systems estimation, so we can estimate the VAR model by applying OLS regression equation-by-equation.</p>
+<p>An example of estimating a VAR model in R will be given below.</p>
 </div>
-<div id="impluse-response-functions" class="section level3">
-<h3>Impluse Response Functions</h3>
+<div id="impulse-response-functions" class="section level3">
+<h3>Impulse Response Functions</h3>
+<p>In applied work, it is often of interest to know the <em>response</em> of one variable to <em>impulse</em> in another variable in a system containing a number of further variables. If there is a reaction in the one variable due to an impulse in the other variable one might call the latter causal for the former. This kind of analysis is sometimes called <em>dynamic multiplier analysis</em>.</p>
+<p>Imagine we are given the following three-variable lag-three VAR model:</p>
+<p><span class="math display">\[
+\begin{bmatrix} y_{1,t} \\ y_{2,t} \\ y_{3,t} \end{bmatrix} = \begin{bmatrix} .5 &amp; 0 &amp; 0 \\ .1 &amp; .1 &amp; .3 \\ 0 &amp; .2 &amp; .3  \end{bmatrix} \begin{bmatrix} y_{1,t-1} \\ y_{2,t-1} \\ y_{3,t-1}
+\end{bmatrix} + \begin{bmatrix} u_{1,t} \\ u_{2,t} \\ u_{3,t}   \end{bmatrix}
+\]</span></p>
+<p><strong><em>Note:</em></strong> Here we are not worrying about estimation, and we are assuming we know the “true” form of the <span class="math inline">\(A_{1}\)</span> matrix.</p>
+<p>Tracing out a unit shock in the first variable in period <span class="math inline">\(t = 0\)</span> in this system we get</p>
+<p><span class="math display">\[
+y_{0} = \begin{bmatrix} y_{1,0} \\ y_{2,0} \\ y_{3,0} \end{bmatrix} = \begin{bmatrix} u_{1,0} \\ u_{2,0} \\ u_{3,0}   \end{bmatrix} = \begin{bmatrix} 1 \\ 0 \\ 0  \end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+y_{1} = \begin{bmatrix} y_{1,1} \\ y_{2,1} \\ y_{3,1} \end{bmatrix} = A_{1} y_{0} = \begin{bmatrix} .5 \\ .1 \\ 0  \end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+y_{2} = \begin{bmatrix} y_{1,2} \\ y_{2,2} \\ y_{3,2} \end{bmatrix} = A_{1} y_{1} = A_{1}^{2} y_{0} = \begin{bmatrix} .25 \\ .06 \\ .02  \end{bmatrix}
+\]</span></p>
+<p>Continuing in this manner, it turns out that <span class="math inline">\(y_{i} = (y_{1,i}, y_{2,i}, y_{3,i})^{\prime}\)</span> is just the first column of <span class="math inline">\(A_{1}^{i}\)</span>. It turns out that a unit shock in <span class="math inline">\(y_{2,t}\)</span> (<span class="math inline">\(y_{3,t}\)</span>) at <span class="math inline">\(t = 0\)</span> after <span class="math inline">\(i\)</span> periods, results in a vector <span class="math inline">\(y_{i}\)</span> which is just the second (third) column of <span class="math inline">\(A_{1}^{i}\)</span>. Thus, the elements of <span class="math inline">\(A_{1}^{i}\)</span> represent the effects of the unit shocks in the variables of the system after <span class="math inline">\(i\)</span> periods. Therefore, they are called impulse responses or dynamic multipliers.</p>
+<p>This is the simplest way to see how impulse responses work, but usually they are calculated from the Vector Moving Average form of the VAR model. Just as with a univariate <span class="math inline">\(AR(p)\)</span> model, a <span class="math inline">\(VAR(p)\)</span> model can be inverted to an infinite-order <span class="math inline">\(VMA(\infty)\)</span> model. The coeficients of the VMA model are the dynamic multipliers.</p>
 </div>
-<div id="hasbroucks-var" class="section level3">
-<h3>Hasbrouck’s VAR</h3>
-</div>
-<div id="vars-in-r" class="section level3">
-<h3>VARs in R</h3>
+<div id="var-modeling-in-r" class="section level3">
+<h3>VAR Modeling in R</h3>
 <pre class="r"><code>suppressMessages(require(vars))</code></pre>
+<p>We can look at the use of VAR models in R with the <code>vars</code> package and its builtin data set on the Canadian macroeconomy.</p>
+<pre class="r"><code>data(Canada)</code></pre>
+<p>First let’s use the AIC to specify a proper number of lags, choosing <span class="math inline">\(10\)</span> as the maximum possible lag:</p>
+<pre class="r"><code>VARselect(Canada, lag.max = 10, type = &quot;const&quot;)</code></pre>
+<pre><code>## $selection
+## AIC(n)  HQ(n)  SC(n) FPE(n) 
+##      3      2      1      3 
+## 
+## $criteria
+##                   1            2            3            4           5
+## AIC(n) -6.191599834 -6.621627919 -6.709002047 -6.512701777 -6.30174681
+## HQ(n)  -5.943189052 -6.174488511 -6.063134014 -5.668105118 -5.25842152
+## SC(n)  -5.568879538 -5.500731387 -5.089929279 -4.395452772 -3.68632157
+## FPE(n)  0.002048239  0.001337721  0.001237985  0.001534875  0.00195439
+##                   6            7            8            9           10
+## AIC(n) -6.194596715 -6.011720944 -6.054479536 -5.912126222 -5.867271844
+## HQ(n)  -4.952542805 -4.570938409 -4.414968375 -4.073886435 -3.830303432
+## SC(n)  -3.080995238 -2.399943231 -1.944525586 -1.303996035 -0.760965421
+## FPE(n)  0.002278812  0.002924622  0.003073249  0.004015164  0.004961704</code></pre>
+<p>The AIC selects a <span class="math inline">\(p = 3\)</span> order model, which we can now fit as follows:</p>
+<pre class="r"><code>fit &lt;- VAR(Canada, p = 3, type = &quot;const&quot;)
+summary(fit)</code></pre>
+<pre><code>## 
+## VAR Estimation Results:
+## ========================= 
+## Endogenous variables: e, prod, rw, U 
+## Deterministic variables: const 
+## Sample size: 81 
+## Log Likelihood: -150.609 
+## Roots of the characteristic polynomial:
+## 1.004 0.9283 0.9283 0.7437 0.7437 0.6043 0.6043 0.5355 0.5355 0.2258 0.2258 0.1607
+## Call:
+## VAR(y = Canada, p = 3, type = &quot;const&quot;)
+## 
+## 
+## Estimation results for equation e: 
+## ================================== 
+## e = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 + e.l3 + prod.l3 + rw.l3 + U.l3 + const 
+## 
+##           Estimate Std. Error t value Pr(&gt;|t|)    
+## e.l1       1.75274    0.15082  11.622  &lt; 2e-16 ***
+## prod.l1    0.16962    0.06228   2.723 0.008204 ** 
+## rw.l1     -0.08260    0.05277  -1.565 0.122180    
+## U.l1       0.09952    0.19747   0.504 0.615915    
+## e.l2      -1.18385    0.23517  -5.034 3.75e-06 ***
+## prod.l2   -0.10574    0.09425  -1.122 0.265858    
+## rw.l2     -0.02439    0.06957  -0.351 0.727032    
+## U.l2      -0.05077    0.24534  -0.207 0.836667    
+## e.l3       0.58725    0.16431   3.574 0.000652 ***
+## prod.l3    0.01054    0.06384   0.165 0.869371    
+## rw.l3      0.03824    0.05365   0.713 0.478450    
+## U.l3       0.34139    0.20530   1.663 0.100938    
+## const   -150.68737   61.00889  -2.470 0.016029 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## 
+## Residual standard error: 0.3399 on 68 degrees of freedom
+## Multiple R-Squared: 0.9988,  Adjusted R-squared: 0.9985 
+## F-statistic:  4554 on 12 and 68 DF,  p-value: &lt; 2.2e-16 
+## 
+## 
+## Estimation results for equation prod: 
+## ===================================== 
+## prod = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 + e.l3 + prod.l3 + rw.l3 + U.l3 + const 
+## 
+##           Estimate Std. Error t value Pr(&gt;|t|)    
+## e.l1      -0.14880    0.28913  -0.515   0.6085    
+## prod.l1    1.14799    0.11940   9.615 2.65e-14 ***
+## rw.l1      0.02359    0.10117   0.233   0.8163    
+## U.l1      -0.65814    0.37857  -1.739   0.0866 .  
+## e.l2      -0.18165    0.45083  -0.403   0.6883    
+## prod.l2   -0.19627    0.18069  -1.086   0.2812    
+## rw.l2     -0.20337    0.13337  -1.525   0.1319    
+## U.l2       0.82237    0.47034   1.748   0.0849 .  
+## e.l3       0.57495    0.31499   1.825   0.0723 .  
+## prod.l3    0.04415    0.12239   0.361   0.7194    
+## rw.l3      0.09337    0.10285   0.908   0.3672    
+## U.l3       0.40078    0.39357   1.018   0.3121    
+## const   -195.86985  116.95813  -1.675   0.0986 .  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## 
+## Residual standard error: 0.6515 on 68 degrees of freedom
+## Multiple R-Squared:  0.98,   Adjusted R-squared: 0.9765 
+## F-statistic: 277.5 on 12 and 68 DF,  p-value: &lt; 2.2e-16 
+## 
+## 
+## Estimation results for equation rw: 
+## =================================== 
+## rw = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 + e.l3 + prod.l3 + rw.l3 + U.l3 + const 
+## 
+##           Estimate Std. Error t value Pr(&gt;|t|)    
+## e.l1    -4.716e-01  3.373e-01  -1.398    0.167    
+## prod.l1 -6.500e-02  1.393e-01  -0.467    0.642    
+## rw.l1    9.091e-01  1.180e-01   7.702 7.63e-11 ***
+## U.l1    -7.941e-04  4.417e-01  -0.002    0.999    
+## e.l2     6.667e-01  5.260e-01   1.268    0.209    
+## prod.l2 -2.164e-01  2.108e-01  -1.027    0.308    
+## rw.l2   -1.457e-01  1.556e-01  -0.936    0.353    
+## U.l2    -3.014e-01  5.487e-01  -0.549    0.585    
+## e.l3    -1.289e-01  3.675e-01  -0.351    0.727    
+## prod.l3  2.140e-01  1.428e-01   1.498    0.139    
+## rw.l3    1.902e-01  1.200e-01   1.585    0.118    
+## U.l3     1.506e-01  4.592e-01   0.328    0.744    
+## const   -1.167e+01  1.365e+02  -0.086    0.932    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## 
+## Residual standard error: 0.7601 on 68 degrees of freedom
+## Multiple R-Squared: 0.9989,  Adjusted R-squared: 0.9987 
+## F-statistic:  5239 on 12 and 68 DF,  p-value: &lt; 2.2e-16 
+## 
+## 
+## Estimation results for equation U: 
+## ================================== 
+## U = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 + e.l3 + prod.l3 + rw.l3 + U.l3 + const 
+## 
+##          Estimate Std. Error t value Pr(&gt;|t|)    
+## e.l1     -0.61773    0.12508  -4.939 5.39e-06 ***
+## prod.l1  -0.09778    0.05165  -1.893 0.062614 .  
+## rw.l1     0.01455    0.04377   0.332 0.740601    
+## U.l1      0.65976    0.16378   4.028 0.000144 ***
+## e.l2      0.51811    0.19504   2.656 0.009830 ** 
+## prod.l2   0.08799    0.07817   1.126 0.264279    
+## rw.l2     0.06993    0.05770   1.212 0.229700    
+## U.l2     -0.08099    0.20348  -0.398 0.691865    
+## e.l3     -0.03006    0.13627  -0.221 0.826069    
+## prod.l3  -0.01092    0.05295  -0.206 0.837180    
+## rw.l3    -0.03909    0.04450  -0.879 0.382733    
+## U.l3      0.06684    0.17027   0.393 0.695858    
+## const   114.36732   50.59802   2.260 0.027008 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## 
+## Residual standard error: 0.2819 on 68 degrees of freedom
+## Multiple R-Squared: 0.9736,  Adjusted R-squared: 0.969 
+## F-statistic: 209.2 on 12 and 68 DF,  p-value: &lt; 2.2e-16 
+## 
+## 
+## 
+## Covariance matrix of residuals:
+##             e     prod       rw        U
+## e     0.11550 -0.03161 -0.03681 -0.07034
+## prod -0.03161  0.42449  0.05589  0.01494
+## rw   -0.03681  0.05589  0.57780  0.03660
+## U    -0.07034  0.01494  0.03660  0.07945
+## 
+## Correlation matrix of residuals:
+##            e     prod      rw        U
+## e     1.0000 -0.14276 -0.1425 -0.73426
+## prod -0.1428  1.00000  0.1129  0.08136
+## rw   -0.1425  0.11286  1.0000  0.17084
+## U    -0.7343  0.08136  0.1708  1.00000</code></pre>
+<p>As you can see the <code>summary</code> function gives a lot of output information. We can see the details of the dataset as follows:</p>
+<pre class="r"><code>help(Canada)</code></pre>
+<pre><code>## starting httpd help server ...</code></pre>
+<pre><code>##  done</code></pre>
+<p>Let’s look at the effects of a unit shock in the <code>prod</code> variable to the <code>e</code> variable by calculating the impulse response function out just a few steps for presentation purposes:</p>
+<pre class="r"><code>irf(fit, impulse = &quot;prod&quot;, response = &quot;e&quot;, n.ahead = 10)</code></pre>
+<pre><code>## 
+## Impulse response coefficients
+## $prod
+##               e
+##  [1,] 0.0000000
+##  [2,] 0.1028456
+##  [3,] 0.2287931
+##  [4,] 0.3425870
+##  [5,] 0.4329710
+##  [6,] 0.5037443
+##  [7,] 0.5618587
+##  [8,] 0.6068535
+##  [9,] 0.6391080
+## [10,] 0.6631028
+## [11,] 0.6823949
+## 
+## 
+## Lower Band, CI= 0.95 
+## $prod
+##                e
+##  [1,] 0.00000000
+##  [2,] 0.01475639
+##  [3,] 0.07415498
+##  [4,] 0.12297136
+##  [5,] 0.16142744
+##  [6,] 0.19270270
+##  [7,] 0.24572747
+##  [8,] 0.24718014
+##  [9,] 0.24401802
+## [10,] 0.21966722
+## [11,] 0.18818700
+## 
+## 
+## Upper Band, CI= 0.95 
+## $prod
+##               e
+##  [1,] 0.0000000
+##  [2,] 0.1922034
+##  [3,] 0.3986087
+##  [4,] 0.5361057
+##  [5,] 0.6710053
+##  [6,] 0.7462291
+##  [7,] 0.8538982
+##  [8,] 0.9087234
+##  [9,] 0.9467016
+## [10,] 0.9802733
+## [11,] 0.9899405</code></pre>
+<p>We can also plot the IRF:</p>
+<pre class="r"><code>irf.e &lt;- irf(fit, impulse = &quot;prod&quot;, response = &quot;e&quot;, n.ahead = 100)
+plot(irf.e)</code></pre>
+<p><img src="data:image/png;base64,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" width="672" /></p>
+<p>As you can see, R makes VAR modeling simple. The key trick is understanding what you are doing!</p>
 </div>
 </div>
 
