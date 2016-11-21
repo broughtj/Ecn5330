@@ -2,7 +2,7 @@
 title: "Univariate Time Series with R"
 author: "Tyler J. Brough"
 date: "November 16, 2016"
-output: html_document
+output: pdf_document
 ---
 
 ## Using the Quantmod Package to Retrieve Financial Time Series
